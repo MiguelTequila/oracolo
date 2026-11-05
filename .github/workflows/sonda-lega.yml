@@ -20,7 +20,7 @@ jobs:
           grep -oE '.{100}(app_key|appKey|x-auth|x-api|Authorization|app-key).{160}' sonda/main.js | head -12 > sonda/header.txt || true
           grep -oE '"[a-zA-Z0-9_/{}$.:-]*/(v[0-9]+)/[a-zA-Z0-9_/{}$.-]*"' sonda/main.js | sort -u | head -150 > sonda/percorsi.txt || true
           grep -oE '.{150}(leagues?/|lega/|/rose|alias).{150}' sonda/main.js | head -25 > sonda/contesto.txt || true
-          rm -f sonda/main.js
+          head -c 300 sonda/main.js > sonda/main_inizio.txt; rm -f sonda/main.js
           for p in ""; do
             f="sonda/pagina_${p:-home}.html"
             code=$(curl -sL -m 30 -A "$UA" -o "$f" -w "%{http_code} %{url_effective}" "https://leghe.fantacalcio.it/serie-f-orco/$p")
