@@ -1,2 +1,0 @@
-"leagues-web"
-"splash-league"
