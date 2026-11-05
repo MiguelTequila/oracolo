@@ -1,4 +1,4 @@
-# 🔮 L'Oracolo del Campionato
+# 🔮 L'Oracolo di ErCaciotta90
 
 Sito gratuito di intrattenimento: l'Oracolo "svela" risultato, marcatori e ammonizioni delle prossime partite di Serie A, più il Quiz del giorno da condividere con la lega.
 

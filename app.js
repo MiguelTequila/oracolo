@@ -1,4 +1,4 @@
-/* L'Oracolo del Campionato — logica del sito (nessuna libreria esterna). */
+/* L'Oracolo di ErCaciotta90 — logica del sito (nessuna libreria esterna). */
 (function () {
 "use strict";
 const CFG = window.CONFIG || {};
@@ -162,7 +162,7 @@ function fraseOracolo(gh, ga, casa, trasf) {
 }
 
 function testoCondivisione(p) {
-  const r = [`🔮 L'Oracolo ha parlato:`, `${p.casa} ${p.gh}-${p.ga} ${p.trasf}`];
+  const r = [`🔮 L'Oracolo di ErCaciotta90 ha parlato:`, `${p.casa} ${p.gh}-${p.ga} ${p.trasf}`];
   if (p.gol.length) r.push("⚽ " + p.gol.map(g => `${g.n} ${g.m}'`).join(", "));
   const rossi = p.cartellini.filter(c => c.tipo !== "giallo");
   const gialli = p.cartellini.filter(c => c.tipo === "giallo");
@@ -403,7 +403,7 @@ function rispondi(k) {
 }
 
 function testoQuiz(r, nick) {
-  return [`🔮 Quiz dell'Oracolo #${r.numero}${nick ? " · " + nick : ""}`, `${r.griglia} ${r.giuste}/5 · ${r.punti} punti`, `⏱️ ${r.secondi}s`, "", "Sfidami: " + urlSito()].join("\n");
+  return [`🔮 Quiz dell'Oracolo di ErCaciotta90 #${r.numero}${nick ? " · " + nick : ""}`, `${r.griglia} ${r.giuste}/5 · ${r.punti} punti`, `⏱️ ${r.secondi}s`, "", "Sfidami: " + urlSito()].join("\n");
 }
 
 function fineQuiz() {
