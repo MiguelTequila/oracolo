@@ -3,3 +3,5 @@ rose -> 200 https://leghe.fantacalcio.it/serie-f-orco/view/dashboard 23386 byte
 squadre -> 200 https://leghe.fantacalcio.it/serie-f-orco/view/dashboard 23386 byte
 classifica -> 200 https://leghe.fantacalcio.it/serie-f-orco/view/dashboard 23386 byte
 calendario -> 200 https://leghe.fantacalcio.it/serie-f-orco/view/dashboard 23386 byte
+main.js 23386
+ -> 200 https://leghe.fantacalcio.it/serie-f-orco/view/dashboard 23386 byte
