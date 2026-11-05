@@ -1,0 +1,103 @@
+{
+ "aggiornato": "2026-11-04",
+ "nota": "Giocatori che l'Oracolo NON fa giocare (infortunati lunghi, squalificati). Scrivi i nomi esattamente come nel listone.",
+ "giocatori": {
+  "Atalanta": [
+   "Kossounou",
+   "Kessiè",
+   "Raspadori",
+   "Kolasinac",
+   "Bellanova",
+   "Kristensen T.",
+   "Gaetano"
+  ],
+  "Bologna": [
+   "Holm",
+   "De Silvestri",
+   "Enem"
+  ],
+  "Cagliari": [
+   "Idrissi R.",
+   "Felici",
+   "Fadera",
+   "Nzola"
+  ],
+  "Como": [
+   "Kean",
+   "Diao",
+   "Addai",
+   "Rodriguez Je."
+  ],
+  "Fiorentina": [
+   "Parisi",
+   "Pongracic"
+  ],
+  "Frosinone": [
+   "Raimondo"
+  ],
+  "Inter": [
+   "Martinez L.",
+   "Luis Henrique"
+  ],
+  "Juventus": [
+   "Yildiz",
+   "Thuram K.",
+   "Locatelli",
+   "Grabara",
+   "Conceicao",
+   "Celik",
+   "Gonzalez N."
+  ],
+  "Lazio": [
+   "Gudmundsson A."
+  ],
+  "Lecce": [
+   "Ilic",
+   "Pierotti",
+   "Geubbels",
+   "Monteiro J."
+  ],
+  "Milan": [
+   "Saelemaekers",
+   "Gabbia",
+   "Chukwueze",
+   "Loftus-Cheek",
+   "Tomori"
+  ],
+  "Monza": [
+   "Pessina"
+  ],
+  "Napoli": [
+   "Buongiorno",
+   "Favasuli",
+   "Neres",
+   "Badiashile",
+   "Spinazzola",
+   "Lobotka",
+   "Di Lorenzo",
+   "Santos A."
+  ],
+  "Parma": [
+   "Bernabè",
+   "Drobnic"
+  ],
+  "Roma": [
+   "Pellegrini Lo."
+  ],
+  "Sassuolo": [
+   "Konè I.",
+   "Leysen F."
+  ],
+  "Torino": [
+   "Rodriguez R.",
+   "Mandragora",
+   "Cacciamani"
+  ],
+  "Udinese": [
+   "Gueye",
+   "Bayo V.",
+   "Alaba",
+   "Zanoli"
+  ]
+ }
+}

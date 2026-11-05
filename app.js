@@ -27,7 +27,7 @@ function poisson(l, r = rnd) { const L = Math.exp(-l); let k = 0, p = 1; do { k+
 function mescola(arr, r = rnd) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
 // ---------- dati
-let PARTITE = [], ROSE = {}, META = {};
+let PARTITE = [], ROSE = {}, META = {}, INDISP = new Set(), RIGORISTI = {};
 async function carica(url) {
   const inl = window.DATI_INLINE; if (inl) { const k = url.split("/").pop().replace(".json", ""); if (inl[k]) return inl[k]; }
   const r = await fetch(url + "?v=" + Date.now().toString().slice(0, -5)); if (!r.ok) throw new Error(url); return r.json(); }
@@ -90,7 +90,10 @@ function lambdaLibera(casa, trasf) {
   return { lh: cl(media * att(casa) * dif(trasf) * 1.11), la: cl(media * att(trasf) * dif(casa) / 1.11), rho: 0 };
 }
 
-function rosaDi(sq) { return (ROSE[sq] && ROSE[sq].length) ? ROSE[sq] : null; }
+function rosaDi(sq) {
+  const r = (ROSE[sq] || []).filter(g => !INDISP.has(sq + "|" + g.n));
+  return r.length ? r : null;
+}
 function pescaGiocatore(sq, pesi, esclusi) {
   const rosa = rosaDi(sq);
   if (!rosa) { const r = pesca(Object.keys(pesi), Object.values(pesi)); return { n: REPARTO[r], r, generico: true }; }
@@ -116,6 +119,8 @@ const INFORTUNI_MEDI = 0.35;         // infortuni a partita che costringono al c
 function rigoristaDi(sq) {
   const rosa = rosaDi(sq);
   if (!rosa) return { n: "Rigorista", generico: true };
+  // prima la lista ufficiale dei rigoristi (il primo disponibile)
+  for (const nome of RIGORISTI[sq] || []) { const g = rosa.find(x => x.n === nome); if (g) return g; }
   // il rigorista e' l'attaccante (o in mancanza il centrocampista) che vale di piu'
   for (const r of ["A", "C"]) {
     const c = rosa.filter(g => g.r === r);
@@ -525,12 +530,15 @@ function pubblicita() {
 async function avvia() {
   schede(); pubblicita(); controllaQuizInterrotto();
   try {
-    const [pa, ro, me] = await Promise.all([carica("data/partite.json"), carica("data/rose.json").catch(() => ({})), carica("data/meta.json").catch(() => ({}))]);
+    const [pa, ro, me, ind, rig] = await Promise.all([carica("data/partite.json"), carica("data/rose.json").catch(() => ({})), carica("data/meta.json").catch(() => ({})),
+      carica("data/indisponibili.json").catch(() => ({})), carica("data/rigoristi.json").catch(() => ({}))]);
+    for (const [sq, nomi] of Object.entries(ind.giocatori || {})) nomi.forEach(n => INDISP.add(sq + "|" + n));
+    RIGORISTI = rig.rigoristi || {};
     const oggi = oggiRoma();
     PARTITE = (pa.partite || []).filter(p => !p.data || p.data >= oggi);
     ROSE = ro.rose || {}; META = me;
     const agg = pa.aggiornato ? new Date(pa.aggiornato).toLocaleDateString("it-IT") : "";
-    $("#info-agg").textContent = agg ? `Ultimo aggiornamento partite: ${agg}.` : "";
+    $("#info-agg").textContent = (agg ? `Ultimo aggiornamento partite: ${agg}. ` : "") + (INDISP.size ? `Indisponibili esclusi dall'Oracolo: ${INDISP.size} (aggiornati al ${new Date(ind.aggiornato).toLocaleDateString("it-IT")}).` : "");
   } catch (e) {
     $("#lista-partite").innerHTML = `<div class="nessuno">Non riesco a leggere le partite. Riprova tra poco.</div>`;
   }
