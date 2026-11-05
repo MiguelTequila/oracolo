@@ -232,7 +232,7 @@ function testoCondivisione(p) {
   const gialli = p.cartellini.filter(c => c.tipo === "giallo"), rossi = p.cartellini.filter(c => c.tipo !== "giallo");
   if (gialli.length) r.push("🟨 " + gialli.map(c => c.n).join(", "));
   if (rossi.length) r.push("🟥 " + rossi.map(c => `${c.n} ${c.m}'`).join(", "));
-  p.rigoriFalliti.forEach(x => r.push(x.esito === "parato" ? `🧤 ${x.portiere} para il rigore a ${x.n} (${x.m}')` : `❌ ${x.n} sbaglia il rigore, ${x.esito} (${x.m}')`));
+  p.rigoriFalliti.forEach(x => r.push(x.esito === "parato" ? `🧤 ${x.portiere} para il rigore · ❌ ${x.n} lo sbaglia (${x.m}')` : `❌ ${x.n} sbaglia il rigore, ${x.esito} (${x.m}')`));
   if (p.infortuni.length) r.push("🚑 " + p.infortuni.map(x => `${x.n} ${x.m}'`).join(", "));
   r.push(`"${p.frase}"`, "", "Interroga anche tu l'Oracolo: " + urlSito());
   return r.join("\n");
@@ -331,9 +331,15 @@ function mostraProfezia(p) {
   const fGol = g => ev(g.m, "⚽", esc(g.n) + (g.assist ? ` <span class="assist">(👟 ${esc(g.assist)})</span>` : "") + (g.extra ? ` <span class="tag">${g.extra === "rig." ? "su rigore" : "autogol"}</span>` : ""));
   const icona = { giallo: "🟨", rosso: "🟥", rosso2: "🟨🟥" };
   const fCart = c => ev(c.m, icona[c.tipo], esc(c.n) + (c.tipo === "rosso" ? ` <span class="tag rosso">rosso diretto</span>` : c.tipo === "rosso2" ? ` <span class="tag rosso">espulso</span>` : ""));
-  const fRig = x => x.esito === "parato"
-    ? ev(x.m, "🧤", `Rigore di ${esc(x.n)} <b>parato</b> da ${esc(x.portiere)}`)
-    : ev(x.m, "❌", `${esc(x.n)} sbaglia il rigore <span class="tag">${x.esito}</span>`);
+  // Come al fanta: il rigore parato vale per il portiere (colonna sua) e come errore per chi tira
+  const rigoriVoci = [];
+  p.rigoriFalliti.forEach(x => {
+    rigoriVoci.push({ sq: x.sq, m: x.m, tipo: "sbagliato", n: x.n, esito: x.esito });
+    if (x.esito === "parato") rigoriVoci.push({ sq: x.sqPortiere, m: x.m, tipo: "parato", n: x.portiere, tiratore: x.n });
+  });
+  const fRig = x => x.tipo === "parato"
+    ? ev(x.m, "🧤", `${esc(x.n)} <b>para</b> il rigore <span class="tag">a ${esc(x.tiratore)}</span>`)
+    : ev(x.m, "❌", `${esc(x.n)} sbaglia il rigore <span class="tag">${x.esito === "parato" ? "parato" : x.esito}</span>`);
   const fInf = x => ev(x.m, `<span class="croce">✚</span>`, `${esc(x.n)} <span class="tag">esce infortunato</span>`);
   const box = $("#responso");
   box.innerHTML = `
@@ -341,7 +347,7 @@ function mostraProfezia(p) {
     <p class="frase">"${esc(p.frase)}"</p>
     ${sezione("⚽ Marcatori", p.gol, fGol)}
     ${sezione("🟨 Cartellini", p.cartellini, fCart)}
-    ${sezione("🎯 Rigori falliti", p.rigoriFalliti, fRig)}
+    ${sezione("🎯 Rigori sbagliati e parati", rigoriVoci, fRig)}
     ${sezione("✚ Infortuni", p.infortuni, fInf)}
     ${!p.cartellini.length ? `<p class="nessuno centro">Partita correttissima: nessun cartellino.</p>` : ""}
     <div class="fila" style="margin-top:16px">
