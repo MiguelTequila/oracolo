@@ -190,16 +190,19 @@ RUOLO_WIKI = {"GK": "P", "DF": "D", "MF": "C", "FW": "A"}
 def estrai_rosa_wikitext(testo):
     """Prende SOLO il primo blocco {{Fs start}}...{{Fs end}} (la prima squadra):
     i blocchi successivi sono prestiti, Primavera, Under 23, Next Gen."""
-    low = testo.lower()
-    a = low.find("{{fs start")
-    if a < 0:
-        a = low.find("{{fs player")
-    if a < 0:
+    low = re.sub(r"\{\{\s+", "{{", testo.lower())
+    testo = re.sub(r"\{\{\s+", "{{", testo)
+    inizi = [low.find(t) for t in ("{{fs start", "{{football squad start", "{{fs2 start")]
+    inizi = [i for i in inizi if i >= 0]
+    if not inizi:
+        inizi = [i for i in (low.find(t) for t in ("{{fs player", "{{football squad player", "{{fs2 player")) if i >= 0]
+    if not inizi:
         return []
-    b = low.find("{{fs end", a)
-    blocco = testo[a:b if b > 0 else len(testo)]
+    a = min(inizi)
+    fini = [i for i in (low.find(t, a) for t in ("{{fs end", "{{football squad end", "{{fs2 end")) if i > 0]
+    blocco = testo[a:min(fini) if fini else len(testo)]
     gioc = []
-    for m in re.finditer(r"\{\{\s*(fs player|football squad player)\s*\|", blocco, re.I):
+    for m in re.finditer(r"\{\{\s*(fs2? player|football squad player2?)\s*\|", blocco, re.I):
         tpl = _template_dopo(blocco, m.start())[2:-2]
         par = {}
         for p in _dividi_parametri(tpl)[1:]:
@@ -213,6 +216,9 @@ def estrai_rosa_wikitext(testo):
     return gioc
 
 
+DIAGNOSTICA = {}
+
+
 def rose_wikipedia():
     rose = {}
     for _, (nome, pagina) in SQUADRE.items():
@@ -223,8 +229,10 @@ def rose_wikipedia():
             r.raise_for_status()
             gioc = estrai_rosa_wikitext(r.json()["parse"]["wikitext"])
             rose[nome] = gioc
+            DIAGNOSTICA[nome] = len(gioc)
             print(f"  Wikipedia {nome}: {len(gioc)} giocatori")
         except Exception as e:
+            DIAGNOSTICA[nome] = f"errore: {e}"[:200]
             print(f"  Wikipedia {nome}: errore {e}")
         time.sleep(1)
     return rose
@@ -264,5 +272,5 @@ if __name__ == "__main__":
         aggiorna_rose(forza="--forza-rose" in sys.argv)
     except Exception as e:
         print(f"[!] Rose non aggiornate: {e}")
-    salva("meta.json", {"ultimoGiro": datetime.now(timezone.utc).isoformat()})
+    salva("meta.json", {"ultimoGiro": datetime.now(timezone.utc).isoformat(), "roseLette": DIAGNOSTICA})
     sys.exit(0 if ok else 1)
