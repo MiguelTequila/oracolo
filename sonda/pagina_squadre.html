@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="it" data-beasties-container>
+	<head>
+		<meta charset="utf-8">
+		<title>Leghe Fantacalcio®</title>
+		<base href="/resources/">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Identity marker of THIS app, read from OUTSIDE the document: LegacyView measures
+		     every page that lands in its iframe against it, because the frame may hold a legacy
+		     page and nothing else (NAVIGATION_MAP.md invariant 22). `app-root` alone would not do
+		     — the legacy ships an Angular app of its own under /newlogin. Do not rename. -->
+		<meta name="fc-native-app" content="leagues-web">
+		<link rel="icon" href="assets/favicon.png">
+
+		<meta name="description" content="Leghe Fantacalcio è la piattaforma di gioco ufficiale di Fantacalcio®">
+		<meta name="keywords" content="Serie-A,EuroLeghe,fanta,fantacalcio,calcio,fantasy,campioncini">
+		<meta name="theme-color" content="#2e6be6">
+		
+		<meta name="apple-itunes-app" content="app-id=977629806">
+		<meta name="google-play-app" content="app-id=it.quadronica.leghe">
+		<meta property="fb:app_id" content="276105532435709">
+		<meta property="og:site_name" content="Leghe Fantacalcio®">
+		<meta property="og:type" content="website">
+		<meta property="og:locale" content="it_IT">
+		<meta property="og:title" content="Leghe Fantacalcio®">
+		<meta property="og:description" content="Leghe Fantacalcio è la piattaforma di gioco ufficiale di Fantacalcio®">
+		<meta property="og:image" content="https://d2lhpso9w1g8dk.cloudfront.net/web/img/socialfg.jpg">
+		<meta property="og:image:width" content="1000">
+		<meta property="og:image:height" content="525">
+		<meta property="og:image:alt" content="Il maghetto di Leghe Fantacalcio con un pallone e il claim «l'unica piattaforma originale»">
+		<meta property="og:url" content="https://leghe.fantacalcio.it/">
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@fantacalcio">
+		<meta name="twitter:title" content="Leghe Fantacalcio®">
+		<meta name="twitter:description" content="Leghe Fantacalcio è la piattaforma di gioco ufficiale di Fantacalcio®">
+		<meta name="twitter:image" content="https://d2lhpso9w1g8dk.cloudfront.net/web/img/socialfg.jpg">
+		<meta name="twitter:creator" content="@fantacalcio">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+
+		<!-- The first call to each of these lands ~2.4s into the load, once the app has
+		     booted, so DNS + TLS are paid at the worst possible moment. Warming the
+		     three connections here costs nothing and saves that handshake: the API
+		     (every page), the icon CDN (the whole chrome) and the image CDN (top bar).
+		     `crossorigin` is required on the two fetched with CORS, otherwise the
+		     warmed socket cannot be reused. Ad hosts are deliberately NOT preconnected. -->
+		<link rel="preconnect" href="https://apileague.fantacalcio.it" crossorigin>
+		<link rel="preconnect" href="https://static.fantacalcio.it" crossorigin>
+		<link rel="preconnect" href="https://content.fantacalcio.it">
+		<style>@layer theme, base, ngzorro, customs, components, utilities, cdk-overlay;</style>
+
+		<!-- Boot splash — see #app-splash in <body>. The classifier runs here, before the body is
+		     parsed, so the skeleton is painted in its final shape and never flashes. It mirrors
+		     APP_ROUTES: `/user/**`, `/not-found` and the league-less root take the external shell;
+		     the auth pages, the embedded webview and the stylesheet showcase get nothing; any other
+		     first segment is a league alias, hence the internal shell. -->
+		<script>
+			(function () {
+				var seg = location.pathname.split('/').filter(Boolean);
+				var kind = 'internal';
+				if (!seg[0] || seg[0] === 'user' || seg[0] === 'not-found') kind = 'external';
+				else if (/^(login|logout|embed|embed-test|stylesheet)$/.test(seg[0]) || seg[1] === 'webview') kind = 'none';
+				document.documentElement.setAttribute('data-splash', kind);
+			})();
+		</script>
+		<style>
+			/* Boot splash. Inline on purpose: once the builder has inlined the critical CSS the
+			   stylesheet loads non-blocking, and these rules must be there for the first paint. The
+			   theme variables live in that stylesheet, hence the fallbacks (theme.less values).
+			
+			   EVERY box below was MEASURED on the running shell at 1280x900 and 390x844, not derived
+			   from the templates: deriving them put the mobile header at 198px when it is 100, kept a
+			   team card that mobile hides, and left the menu in the header when mobile floats it at the
+			   bottom of the screen. `e2e/boot-splash.e2e.mjs` compares the two at both sizes, so a
+			   layout change that moves the real header makes that file go red — which is the only thing
+			   keeping this stylesheet honest. */
+			#app-splash {
+				display: none;
+				position: fixed;
+				inset: 0;
+				/* ABOVE the app, not behind it — above the header's own --z-app-bar (300) and below the
+				   ng-zorro overlays (1000). Behind was the first design and it does not work: <main> is
+				   opaque, so the moment Angular renders it the skeleton is covered, and what the reader
+				   gets is the half-built header underneath — one placeholder pill and the translucent
+				   circle of a team logo still downloading. Hiding those pieces instead only moves the
+				   problem (measured 17/09: the band went empty, then white). On top, the skeleton simply
+				   stays whole until the real shell is whole, and the two have the same geometry.
+				   LayoutComponentAbstract takes it away at the first Page.ready, with a timeout as a
+				   backstop so nothing it cannot foresee can leave the page covered. */
+				z-index: 500;
+				overflow: hidden;
+				pointer-events: none;
+				--splash-page: var(--page, #e8effc);
+				--splash-primary: var(--primary, #0256D1);
+				--splash-surface: var(--surface, #ffffff);
+				--splash-ink: rgb(0 0 0 / 10%);
+			}
+			html[data-splash="internal"] #app-splash,
+			html[data-splash="external"] #app-splash { display: block; }
+			/* One class each, and deliberately NOT `#app-splash span`: that carries an id's
+			   specificity, so it beat every `display: none` and every `position: fixed` written
+			   afterwards — the mobile skeleton kept drawing a notifications button and a team card the
+			   real shell hides, and left the menu in the header instead of at the foot of the screen.
+			   Same weight as the rules that override them, so source order decides, which is what one
+			   reads off the page. */
+			.splash-pill, .splash-avatar, .splash-league, .splash-competition,
+			.splash-chevron { position: absolute; display: block; }
+
+			/* ui-top-bar: fixed, py-1, the brand gradient; the strip image sits in a 1080px box.
+			   The stops are `--brand-strip` of theme.less spelled out: the splash paints before the
+			   stylesheet that defines the token is there, so this copy is kept in step by hand. */
+			.splash-strip { position: absolute; top: 0; left: 0; width: 100%; padding-block: 4px; background: linear-gradient(90deg, #0015FF 0%, #00FAFF 100%); }
+			.splash-strip div { width: 1080px; margin: 0 auto; }
+			.splash-strip img { display: block; width: 274px; height: 21px; }
+
+			/* The page card: measured at 95,192 1080x188+ on a 1280 viewport. Both shells scroll inside
+			   their own host, so the card lives in the viewport MINUS the scrollbar — hence the
+			   half-scrollbar shift and the capped max-width. Guessing that width is what put the
+			   skeleton 5px off the real page, so --splash-sbw is measured in the document instead; it
+			   resolves to 0 where scrollbars are overlays, which is right there too. */
+			.splash-page { position: absolute; top: 192px; left: 50%; width: 1080px; max-width: calc(100% - var(--splash-sbw, 0px)); height: 1024px; transform: translateX(calc(-50% - var(--splash-sbw, 0px) / 2)); border-radius: 30px; background: var(--splash-page); }
+			html[data-splash="external"] .splash-page { top: 190px; }
+
+			/* ui-main-header: bg-primary under the showcase pattern, rounded-t-2xl. 188px with the team
+			   card inside it, 100 without (the external shell, and mobile). The pattern is the very file
+			   the real header loads, so for that one the request is a cache hit. */
+			.splash-header { position: relative; height: 188px; border-radius: 30px 30px 0 0; background: var(--splash-primary) url(assets/images/default/showcase_pattern.webp) center / cover no-repeat; }
+			html[data-splash="external"] .splash-header { height: 100px; }
+
+			/* What the header carries, measured relative to the page card: the context switcher at 8,8,
+			   the menu at 362,8 (355x50, i.e. centred), the notifications button at 930,8 (50x50) and
+			   the user badge at 996,8.
+			
+			   Two of those ghosts are deliberately NOT as wide as the control they stand for, because
+			   the control does not start that wide either:
+			   - the user badge is 76 wide once settled, but it enters as its avatar alone and grows as
+			     the chevron uncollapses (`h-uncollapse`), so the ghost is the CIRCLE it starts from;
+			   - the switcher is as wide as the league's name (266 on the fixture), so the ghost is the
+			     180 it starts from and the real pill grows from the same 180 (`switcher-grow`). The
+			     placeholder inside ui-context-switcher uses that number too: the three have to agree. */
+			.splash-pill { top: 8px; height: 50px; border-radius: 30px; background: var(--splash-surface); }
+			.splash-switcher { left: 8px; width: 180px; }
+			.splash-nav { left: 50%; width: 355px; transform: translateX(-50%); display: flex; justify-content: center; gap: 4px; padding: 0 15px; box-sizing: border-box; }
+			.splash-nav span { position: relative; width: 60px; }
+			.splash-nav span::before, .splash-nav span::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); border-radius: 4px; background: var(--splash-ink); }
+			.splash-nav span::before { top: 9px; width: 16px; height: 16px; }
+			.splash-nav span::after { top: 31px; width: 44px; height: 8px; }
+			/* 74 and not 100: the real bell sits 16px (gap-4) to the left of the user badge, and the
+			   badge is 50 wide while it enters — it reaches 76, pushing the bell out to 100, only once
+			   its chevron has opened. The ghost copies where things START. */
+			.splash-bell { right: 74px; width: 50px; border-radius: 50%; }
+			.splash-user { right: 8px; width: 50px; border-radius: 50%; }
+			.splash-avatar { top: 4px; width: 40px; height: 40px; border-radius: 50%; background: var(--splash-ink); }
+			.splash-switcher .splash-avatar { left: 4px; }
+			.splash-user .splash-avatar { right: 4px; }
+			.splash-league { top: 11px; left: 54px; width: 90px; height: 14px; border-radius: 6px; background: var(--splash-ink); }
+			.splash-competition { top: 30px; left: 54px; width: 60px; height: 10px; border-radius: 6px; background: var(--splash-ink); }
+			.splash-chevron { top: 19px; right: 12px; width: 12px; height: 12px; border-radius: 3px; background: var(--splash-ink); }
+
+			/* No ghost for ui-my-team-card, on purpose. It used to be drawn here as translucent white
+			   shapes over the blue, and they read as smudges on the header rather than as a card about
+			   to arrive. The band stays 188px all the same: that height comes from the REAL card, which
+			   sits in the header and spills 20px below it. */
+			html[data-splash="external"] .splash-nav { display: none; }
+
+			/* Below md (768px = LayoutService.isMobile) the shell rearranges itself, and the skeleton
+			   has to follow: no top bar, the internal page flush and full-height, a header of 100px
+			   (the team card is DISPLAY:NONE there, which is what made it 188 on desktop), no
+			   notifications button, and the menu floating at the bottom of the screen. Switcher, badge
+			   and menu go `fixed` because the real ones hang off a `position: fixed` nav — they line up
+			   with the VIEWPORT, not with the page, which is narrower by the scrollbar. */
+			@media (max-width: 767px) {
+				.splash-strip, .splash-bell { display: none; }
+				html[data-splash="internal"] .splash-page { top: 0; left: 0; width: 100%; height: 100%; transform: none; border-radius: 0; }
+				html[data-splash="internal"] .splash-header { height: 100px; border-radius: 0; }
+				.splash-switcher, .splash-user, .splash-nav { position: fixed; }
+				.splash-nav { top: auto; bottom: 8px; }
+			}
+		</style>
+	<style>html,body{width:100%;height:100%}*,*:before,*:after{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-ms-overflow-style:scrollbar;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{margin:0;color:#676f82;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,Open Sans,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol;font-variant:tabular-nums;line-height:1.2;background-color:#e8effc;font-feature-settings:"tnum"}img{vertical-align:middle;border-style:none}html{--antd-wave-shadow-color:#0256D1;--scroll-bar:0}:root{--primary:#0256D1;--primary-lighten:#096cfd;--primary-lightest:#ccddf6;--primary-darken:#02419e;--primary-container:#DAE2FF;--primary-inverse:#B2C5FF;--brand-strip:linear-gradient(90deg, #0015FF 0%, #00FAFF 100%);--accent:#ff7733;--accent-lighten:#ff9966;--accent-lightest:#ffe4d6;--accent-darken:#ff5500;--on-accent:#6300ff;--success:#57bc65;--success-lighten:#69c376;--success-lightest:#ddf2e0;--success-darken:#40a04d;--success-darkest:#317c3c;--success-container:#ddf2e0;--caution:#e0a82e;--caution-lighten:#e3b144;--caution-lightest:#f9eed5;--caution-darken:#bf8c1c;--caution-container:#f9eed5;--info:#42a6ea;--info-lighten:#59b1ed;--info-lightest:#d9edfb;--info-darken:#198fe0;--info-container:#d9edfb;--warning:#6e28f3;--warning-lighten:#7e40f4;--warning-lightest:#e2d4fd;--warning-darken:#540cdc;--warning-container:#e2d4fd;--error:#f21a3c;--error-light:#f32d4c;--error-lightest:#fcd1d8;--error-container:#fcd1d8;--danger:#f21a3c;--danger-light:#f32d4c;--danger-lighten:#f33251;--danger-lightest:#fcd1d8;--danger-lighter:#faa3b1;--danger-darken:#cd0c2a;--danger-container:#fcd1d8;--neutral:#d8e4f8;--neutral-lighten:#eef3fc;--neutral-lightest:#f7fafe;--neutral-darken:#45464f;--neutral-container:#f7fafe;--golden:#ffcb79;--golden-darken:color-mix(in lab, var(--golden), black 30%);--live:#4ced68;--live-lighten:#68f07f;--live-container:#e4fce8;--live-lightest:#dbfbe1;--live-darken:#0f671f;--on-live:#0f672e;--on-primary:#fff;--on-success:#23572a;--on-inverse:#0256D1;--inverse:#fff;--inverse-lighten:#f2f2f2;--inverse-darken:#e0e0e0;--muted:#45464f;--muted-lighten:#51525d;--muted-lightest:#dadadc;--muted-darken:#ffffff;--muted-container:#dadadc;--highlight:#f21a3c;--rad:12px;--font:-apple-system, BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";--page:#e8effc;--surface:#ffffff;--surface-dark:#f2f2f2;--surface-darken:#e6e6e6;--surface-darkest:#b3b3b3;--surface-light:#ffffff;--surface-lighten:#ffffff;--surface-lightest:#ffffff;--surface-soft:color-mix(in lab, var(--primary) 14%, transparent);--surface-glass:color-mix(in lab, var(--surface-light), transparent 90%);--surface-inverse:#0256D1;--surface-inverse-lighten:#0260ea;--surface-text:#181c20;--canvas:#e8effc;--canvas-dark:#dae2ff;--pad:10px;--gap:10px;--content-v-offset:0;--text-color:#676f82;--text-color-soft:#babec8;--text-color-inverse:#fff;--border-color:transparent;--border-radius-base:12px;--role-gk:#f8ab11;--role-def:#63c617;--role-mid:#1169f7;--role-w:#8a1af2;--role-fw:#f21a3c;--role-mov:#63c617;--input-border-color:transparent;--classic-color:#0256D1;--mantra-color:#f21a3c;--ease-instant:cubic-bezier(1, 0, 0, 1);--shadow:0 2px 10px rgba(0, 0, 0, .3);--shirt-backdrop-shadow:#0D3440;--crest-backdrop-shadow:#01214C;--rounded-2xl:30px;--rounded-xl:15px;--rounded-lg:20px;--rounded-md:12px;--rounded-sm:10px;--rounded-xs:6px}:root{--z-behind:-1;--z-base:0;--z-raised:1;--z-content:10;--z-sticky:50;--z-fixed:100;--z-header:200;--z-app-bar:300;--z-nz-overlay:1000;--z-nz-message:1010;--z-nz-popover:1030;--z-nz-dropdown:1050;--z-nz-tooltip:1070;--z-nz-image:1080;--z-above-overlay:1100;--z-standby:1200}body:has(ui-main-nav.floating){--fab-clearance:58px}:root{--ease-instant:cubic-bezier(1, 0, 0, 1)}:root{--role-por:var(--role-gk);--role-dc:var(--role-def);--role-dd:var(--role-def);--role-ds:var(--role-def);--role-b:var(--role-def);--role-e:var(--role-mid);--role-c:var(--role-mid);--role-m:var(--role-mid);--role-t:var(--role-w);--role-a:var(--role-fw);--role-pc:var(--role-fw)}:root{interpolate-size:allow-keywords}body:has(.cdk-drag-dragging){cursor:grabbing!important}body:has(.cdk-drag-dragging) *{cursor:grabbing!important}html[lang][lang]>head+body{--space:5px}*:focus-visible{border-radius:var(--rad) \!important}:root{--page-w:1080px;--icon-size-default:14px;--icon-font-size-ng-zorro:var(--icon-size-default);--icon-font-size-mi:1.2rem}body{font-weight:500;--bg-base:#c8e4ff;--bg-grad-center:#7da4ff;--bg-grad-edge:#d9ecff;--bg-grad-r:1100px;--bg-esa:rgb(255 255 255 / 20%);--bg-esa-w:3650px;--bg-esa-x:0px;--bg-esa-y:210px;background-color:var(--bg-base);background-image:radial-gradient(circle var(--bg-grad-r) at 50% 100%,var(--bg-grad-center) 0%,var(--bg-grad-edge) 100%);background-attachment:fixed;background-repeat:no-repeat}body:before{content:"";position:fixed;inset:0;z-index:-1;background-color:var(--bg-esa);-webkit-mask:url(/resources/assets/images/default/esa.svg) no-repeat calc(50% + var(--bg-esa-x)) var(--bg-esa-y)/var(--bg-esa-w) auto;mask:url(/resources/assets/images/default/esa.svg) no-repeat calc(50% + var(--bg-esa-x)) var(--bg-esa-y)/var(--bg-esa-w) auto;pointer-events:none}*{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.2) transparent}*:focus-visible:not(input,textarea){border-radius:15px;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1));--tw-bg-opacity:.2;outline-style:dotted;outline-width:1px;outline-color:var(--text-color-inverse)}*,:before,:after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / .5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:before,:after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}:before,:after{--tw-content:""}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}img{display:block;vertical-align:middle}img{max-width:100%;height:auto}@property --tw-mask-top{syntax:"*";inherits:false;}@property --tw-mask-top-from{syntax:"*";inherits:false;}@property --tw-mask-top-to{syntax:"*";inherits:false;}@property --tw-mask-right{syntax:"*";inherits:false;}@property --tw-mask-right-from{syntax:"*";inherits:false;}@property --tw-mask-right-to{syntax:"*";inherits:false;}@property --tw-mask-bottom{syntax:"*";inherits:false;}@property --tw-mask-bottom-from{syntax:"*";inherits:false;}@property --tw-mask-bottom-to{syntax:"*";inherits:false;}@property --tw-mask-left{syntax:"*";inherits:false;}@property --tw-mask-left-from{syntax:"*";inherits:false;}@property --tw-mask-left-to{syntax:"*";inherits:false;}</style><link rel="stylesheet" href="styles-7PCV546O.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-7PCV546O.css"></noscript><link rel="modulepreload" href="main-DHOBqtPU.js"></head>
+	<body>
+		<!-- Boot splash: the shell, from the first paint on. Between the first paint (this
+		     document plus the critical CSS the builder inlines) and Angular's first render
+		     (download, parse and run of the eager bundle, then the route's lazy chunks) the page
+		     used to be the background alone. This is a static, CSS-only rendition of the shell:
+		     top strip, page card and the header piece by piece (pattern, context switcher, menu,
+		     notifications, user badge), drawn with the SAME geometry as
+		     layout-internal / layout-external, so the real shell lands exactly on top of it. It
+		     sits UNDER app-root (z-index -1): while ui-loader dims the freshly rendered shell to
+		     30%, the skeleton beneath keeps the structure looking solid, and
+		     LayoutComponentAbstract removes it the first time Page.ready turns true. Not inside
+		     <app-root>: Angular empties the host element when it bootstraps, long before any
+		     layout has rendered. Strip and pattern are the real images, so the shell's own
+		     requests for them are cache hits. -->
+		<!-- How wide this browser draws a scrollbar, for the centring above. Measured rather than
+		     assumed, on a probe that declares the same `scrollbar-width: thin` the app sets on
+		     everything, so the answer does not depend on whether the stylesheet has arrived yet.
+		     In the body and not in <head>: it needs somewhere to put the probe. -->
+		<script>
+			(function () {
+				var probe = document.createElement('div');
+				probe.style.cssText = 'position:absolute;top:-9999px;width:100px;height:100px;overflow-y:scroll';
+				probe.style.scrollbarWidth = 'thin';
+				document.body.appendChild(probe);
+				var width = probe.offsetWidth - probe.clientWidth;
+				probe.remove();
+				document.documentElement.style.setProperty('--splash-sbw', width + 'px');
+			})();
+		</script>
+		<div id="app-splash" aria-hidden="true">
+			<div class="splash-strip"><div><img src="assets/images/sky_strip_2022.png" width="274" height="21" alt></div></div>
+			<div class="splash-page">
+				<div class="splash-header">
+					<span class="splash-pill splash-switcher"><span class="splash-avatar"></span><span class="splash-league"></span><span class="splash-competition"></span><span class="splash-chevron"></span></span>
+					<span class="splash-pill splash-nav"><span></span><span></span><span></span><span></span><span></span></span>
+					<span class="splash-pill splash-bell"></span>
+					<span class="splash-pill splash-user"><span class="splash-avatar"></span></span>
+				</div>
+			</div>
+		</div>
+		<app-root></app-root>
+	<script src="polyfills-5FDKUQTZ.js" type="module"></script><script src="main-GLRJLGUO.js" type="module"></script></body>
+</html>
