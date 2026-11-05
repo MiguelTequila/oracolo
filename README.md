@@ -34,3 +34,7 @@ Prima servono un dominio tuo, un pubblico stabile e il via libera di commerciali
 ## Avvertenze
 
 Sito amatoriale, non affiliato alla Lega Serie A, alla FIGC o ai club. Niente quote, niente link a bookmaker, niente loghi dei club.
+
+## Sfida Fanta
+
+Nella scheda Oracolo → "⚡ Sfida Fanta" ognuno carica il file Excel delle rose della propria lega, scaricato da leghe.fantacalcio.it → Rose → Excel. Il file viene letto nel browser con `lib/xlsx.mini.min.js` (SheetJS, licenza Apache-2.0) e resta salvato solo sul telefono di chi lo carica. L'Oracolo simula tutta la prossima giornata e schiera in automatico i migliori 11 disponibili, scegliendo il modulo più forte; chi non gioca viene sostituito dalla panchina, con al massimo 3 cambi. Voti e bonus sono quelli classici: gol +3, assist +1, giallo −0,5, rosso −1, rigore parato +3, rigore sbagliato −3, autogol −2, −1 per ogni gol subito dal portiere. Soglia del primo gol, punti per ogni gol in più e "portiere imbattuto +1" si impostano in "Regole della lega".

@@ -115,3 +115,23 @@ main{max-width:640px;margin:0 auto;padding:8px 12px 24px}
 .esito-cl{margin:10px 0 0;font-size:.85rem}
 .due-campi{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
 .assist{color:var(--tenue);font-size:.82rem;white-space:nowrap}
+.int{font-size:.86rem}
+.fanta-box{background:var(--carta);border-radius:14px;padding:14px}
+.fanta-box ol{margin:6px 0 10px;padding-left:20px;font-size:.88rem}
+.fanta-box ol li{margin:3px 0}
+.file-btn{display:block;text-align:center;cursor:pointer}
+.file-btn input{display:none}
+.regole{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.regole label{font-size:.75rem;color:var(--tenue);display:flex;flex-direction:column;gap:3px}
+.regole input[type=number]{padding:8px;border-radius:10px;background:var(--fondo2);color:var(--testo);border:1px solid var(--carta2);font:inherit}
+.regole .spunta{flex-direction:row;align-items:center;gap:6px;grid-column:1/-1}
+.link{background:none;border:0;color:var(--viola2);text-decoration:underline;padding:0;font-size:.8rem}
+.fanta-tot{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;text-align:center;color:var(--tenue);font-size:.85rem;margin-bottom:6px}
+.fanta-tot b{color:var(--testo);font-size:1.05rem}
+.formazione{font-size:.8rem}
+.gioc{display:grid;grid-template-columns:16px 1fr auto;gap:4px;align-items:baseline;padding:4px 0;border-bottom:1px dashed rgba(169,139,255,.12)}
+.gioc .r{color:var(--tenue);font-size:.7rem;font-weight:700}
+.gioc .fv{font-weight:800;font-variant-numeric:tabular-nums}
+.gioc .det{grid-column:2/-1;color:var(--tenue);font-size:.72rem}
+.gioc.sv{opacity:.45}
+.gioc.entra .r{color:var(--verde)}

@@ -265,6 +265,8 @@ function preparaOracolo() {
     statoO.modo = b.dataset.modo;
     $("#pannello-giornata").hidden = statoO.modo !== "giornata";
     $("#pannello-libera").hidden = statoO.modo !== "libera";
+    $("#pannello-fanta").hidden = statoO.modo !== "fanta";
+    if (statoO.modo === "fanta") disegnaPannelloFanta();
     aggiornaBottone();
   });
   $("#interroga").onclick = interroga;
@@ -298,6 +300,9 @@ function aggiornaBottone() {
   const b = $("#interroga");
   if (statoO.modo === "giornata") {
     b.disabled = !statoO.scelta; b.textContent = statoO.scelta ? "🔮 Interroga l'Oracolo" : "Scegli una partita";
+  } else if (statoO.modo === "fanta") {
+    const ok = $("#fanta-a") && $("#fanta-a").value !== $("#fanta-b").value && statoO.giornate.length;
+    b.disabled = !ok; b.textContent = !$("#fanta-a") ? "Carica prima le rose della lega" : ok ? "⚡ Interroga l'Oracolo" : "Scegli due squadre diverse";
   } else {
     const ok = $("#sel-casa").value && $("#sel-casa").value !== $("#sel-trasf").value;
     b.disabled = !ok; b.textContent = ok ? "🔮 Interroga l'Oracolo" : "Scegli due squadre diverse";
@@ -308,6 +313,13 @@ let inCorso = false;
 function interroga() {
   if (inCorso) return;
   let casa, trasf, lam;
+  if (statoO.modo === "fanta") {
+    const box = $("#responso"); box.hidden = false; inCorso = true;
+    box.innerHTML = `<div class="sfera"></div><p class="attesa">L'Oracolo sta giocando tutta la giornata…</p>`;
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => { const f = sfidaFanta(); if (f) mostraSfidaFanta(f); inCorso = false; }, 1800);
+    return;
+  }
   if (statoO.modo === "giornata") { const p = statoO.scelta; casa = p.casa; trasf = p.trasferta; lam = { lh: p.lh, la: p.la, rho: p.rho || 0 }; }
   else { casa = $("#sel-casa").value; trasf = $("#sel-trasf").value; lam = lambdaLibera(casa, trasf); }
   const box = $("#responso"); box.hidden = false; inCorso = true;
@@ -356,6 +368,232 @@ function mostraProfezia(p) {
     </div>`;
   $("#cond-prof").onclick = () => condividi(testoCondivisione(p));
   $("#di-nuovo").onclick = interroga;
+}
+
+
+// ================================================================ SFIDA FANTA
+// Rose importate dal file Excel di Leghe Fantacalcio (Rose -> Esporta). Restano
+// salvate solo su questo telefono. Il file ha una colonna per squadra con
+// accanto "costo"; i giocatori sono in ordine P, D, C, A; l'ultima riga e' "totale".
+const FANTA_DEF = { soglia: 66, passo: 6, imbattuto: false };
+const MODULI = ["3-4-3", "4-3-3", "3-5-2", "4-4-2", "4-5-1", "5-3-2", "5-4-1"];
+const PROB_GIOCA = { 1: 0.2, 2: 0.45, 3: 0.7, 4: 0.88, 5: 0.95 };
+
+function caricaLibreriaExcel() {
+  if (window.XLSX) return Promise.resolve();
+  return new Promise((ok, ko) => {
+    const sc = document.createElement("script");
+    sc.src = "lib/xlsx.mini.min.js"; // SheetJS 0.18.5, licenza Apache-2.0
+    sc.onload = ok; sc.onerror = () => ko(new Error("libreria"));
+    document.head.appendChild(sc);
+  });
+}
+function indiceListone() { // nome -> {sq, r, p} dal listone di Serie A
+  const idx = {};
+  for (const [sq, gioc] of Object.entries(ROSE)) for (const g of gioc) idx[g.n] = { sq, r: g.r, p: g.p || 2, n: g.n };
+  return idx;
+}
+const normNome = x => String(x || "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’'`]/g, "'").toLowerCase().trim();
+
+async function importaRoseFanta(file) {
+  await caricaLibreriaExcel();
+  const wb = XLSX.read(await file.arrayBuffer(), { type: "array" });
+  const righe = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: null });
+  // riga di intestazione: quella con piu' celle "costo"
+  let hi = 0, best = 0;
+  righe.slice(0, 10).forEach((r, i) => { const n = r.filter(c => normNome(c) === "costo").length; if (n > best) { best = n; hi = i; } });
+  const testa = righe[hi] || [], colonne = [];
+  testa.forEach((c, j) => { if (c && normNome(c) !== "costo" && (best === 0 || normNome(testa[j + 1]) === "costo")) colonne.push(j); });
+  const idx = indiceListone(), perNorm = {};
+  for (const n of Object.keys(idx)) perNorm[normNome(n)] = n;
+  const squadre = {}; let trovati = 0, totali = 0; const mancanti = [];
+  for (const j of colonne) {
+    const nome = String(testa[j]).trim(), gioc = [];
+    for (let i = hi + 1; i < righe.length; i++) {
+      const v = righe[i][j]; if (v == null || v === "") continue;
+      if (normNome(v) === "totale") break;
+      totali++;
+      const vero = perNorm[normNome(v)];
+      if (vero) { trovati++; gioc.push(vero); } else { mancanti.push(`${v} (${nome})`); gioc.push("?" + String(v).trim()); }
+    }
+    if (gioc.length) squadre[nome] = gioc;
+  }
+  if (Object.keys(squadre).length < 2) throw new Error("formato");
+  const lega = (file.name.match(/^(.+?)-rosters/i) || [, ""])[1].replace(/-/g, " ").trim();
+  const dati = { lega: lega ? lega.replace(/\b\w/g, c => c.toUpperCase()) : "La mia lega", squadre, importato: new Date().toISOString(), trovati, totali, mancanti };
+  mem.set("fanta", dati);
+  return dati;
+}
+
+function regoleFanta() { return Object.assign({}, FANTA_DEF, mem.get("fantaRegole", {})); }
+
+function disegnaPannelloFanta() {
+  const box = $("#pannello-fanta"), dati = mem.get("fanta", null), reg = regoleFanta();
+  if (!dati) {
+    box.innerHTML = `<div class="fanta-box">
+      <b>Sfida la tua lega</b>
+      <p class="piccolo">L'Oracolo simula la prossima giornata di Serie A e calcola i fantapunti di due squadre della tua lega.</p>
+      <ol>
+        <li>Da browser apri la tua lega su <b>leghe.fantacalcio.it</b></li>
+        <li>Vai su <b>Rose</b> e scarica il file <b>Excel</b></li>
+        <li>Torna qui e caricalo</li>
+      </ol>
+      <label class="bottone oro file-btn">📂 Carica il file delle rose<input type="file" id="file-fanta" accept=".xlsx,.xls"></label>
+      <p class="piccolo">Il file resta solo sul tuo telefono: non viene inviato a nessuno.</p>
+    </div>`;
+  } else {
+    const nomi = Object.keys(dati.squadre);
+    const opz = sel => nomi.map((n, i) => `<option ${i === sel ? "selected" : ""}>${esc(n)}</option>`).join("");
+    box.innerHTML = `<div class="fanta-box">
+      <div class="piccolo">🏆 <b>${esc(dati.lega)}</b> · ${nomi.length} squadre ·
+        <button class="link" id="fanta-cambia">carica un file nuovo</button></div>
+      <div class="sfida" style="padding:10px 0 0;background:none">
+        <label>Casa<select id="fanta-a">${opz(0)}</select></label><span class="vs">VS</span>
+        <label>Trasferta<select id="fanta-b">${opz(1)}</select></label>
+      </div>
+      <details style="margin-top:8px"><summary class="piccolo">⚙️ Regole della lega</summary>
+        <div class="regole">
+          <label>Primo gol a<input type="number" id="r-soglia" min="50" max="80" step="1" value="${reg.soglia}"></label>
+          <label>Ogni gol in più<input type="number" id="r-passo" min="2" max="10" step="0.5" value="${reg.passo}"></label>
+          <label class="spunta"><input type="checkbox" id="r-imb" ${reg.imbattuto ? "checked" : ""}> Portiere imbattuto +1</label>
+        </div>
+      </details>
+      ${dati.mancanti && dati.mancanti.length ? `<p class="piccolo">⚠️ ${dati.mancanti.length} giocatori non sono nel listone (ceduti o fuori lista) e non giocano: ${esc(dati.mancanti.slice(0, 6).join(", "))}${dati.mancanti.length > 6 ? "…" : ""}</p>` : ""}
+    </div>`;
+    $("#fanta-a").onchange = $("#fanta-b").onchange = aggiornaBottone;
+    $("#fanta-cambia").onclick = () => { mem.set("fanta", null); disegnaPannelloFanta(); aggiornaBottone(); };
+    const salvaReg = () => mem.set("fantaRegole", { soglia: +$("#r-soglia").value || 66, passo: +$("#r-passo").value || 6, imbattuto: $("#r-imb").checked });
+    ["#r-soglia", "#r-passo", "#r-imb"].forEach(id => $(id).onchange = salvaReg);
+  }
+  const f = $("#file-fanta");
+  if (f) f.onchange = async () => {
+    if (!f.files[0]) return;
+    toast("Leggo il file…");
+    try { const d = await importaRoseFanta(f.files[0]); toast(`Caricate ${Object.keys(d.squadre).length} squadre`); }
+    catch (e) { toast(e.message === "libreria" ? "Serve la connessione per leggere il file" : "File non riconosciuto: usa l'Excel delle rose di Leghe Fantacalcio"); }
+    disegnaPannelloFanta(); aggiornaBottone();
+  };
+}
+
+// Simula tutta la giornata e raccoglie cosa fa ogni giocatore
+function simulaGiornata() {
+  const g = statoO.giornate[0], partite = PARTITE.filter(p => p.giornata === g);
+  const ev = {}, squadraReale = {};
+  const E = n => (ev[n] = ev[n] || { gol: 0, rig: 0, ass: 0, amm: 0, esp: 0, aut: 0, rigSb: 0, rigPar: 0, evento: false });
+  for (const p of partite) {
+    const pr = profezia(p.casa, p.trasferta, { lh: p.lh, la: p.la, rho: p.rho || 0 });
+    squadraReale[p.casa] = { fatti: pr.gh, subiti: pr.ga, esito: Math.sign(pr.gh - pr.ga), partita: `${p.casa} ${pr.gh}-${pr.ga} ${p.trasferta}` };
+    squadraReale[p.trasferta] = { fatti: pr.ga, subiti: pr.gh, esito: Math.sign(pr.ga - pr.gh), partita: squadraReale[p.casa].partita };
+    pr.gol.forEach(x => {
+      if (x.extra === "aut.") { E(x.n).aut++; E(x.n).evento = true; return; }
+      const e = E(x.n); e.gol++; e.evento = true; if (x.extra === "rig.") e.rig++;
+      if (x.assist) { E(x.assist).ass++; E(x.assist).evento = true; }
+    });
+    pr.cartellini.forEach(c => { const e = E(c.n); e.evento = true; if (c.tipo === "giallo") e.amm++; else { e.esp++; if (c.tipo === "rosso2") e.amm = 0; } });
+    pr.rigoriFalliti.forEach(x => { E(x.n).rigSb++; E(x.n).evento = true; if (x.portiere) { E(x.portiere).rigPar++; E(x.portiere).evento = true; } });
+    pr.infortuni.forEach(x => { E(x.n).evento = true; });
+  }
+  return { giornata: g, ev, squadraReale };
+}
+
+function arrotonda05(x) { return Math.round(x * 2) / 2; }
+function fantaVoto(info, sim, reg) {
+  const r = sim.squadraReale[info.sq]; if (!r) return null; // la sua squadra non gioca
+  const e = sim.ev[info.n] || { gol: 0, rig: 0, ass: 0, amm: 0, esp: 0, aut: 0, rigSb: 0, rigPar: 0, evento: false };
+  // gioca? chi ha fatto qualcosa nella simulazione gioca di sicuro; il portiere titolare e' il piu' quotato disponibile
+  let gioca = e.evento;
+  if (!gioca) {
+    if (info.r === "P") { const tit = portiereDi(info.sq); gioca = tit.n === info.n; }
+    else gioca = rnd() < (PROB_GIOCA[info.p] || 0.5);
+  }
+  if (!gioca) return null;
+  let v = 6 + r.esito * 0.25 + pesca([-1, -0.5, 0, 0.5, 1], [1, 3, 4, 3, 1]);
+  if (info.r === "P") v = 6.5 - 0.5 * r.subiti + pesca([-0.5, 0, 0.5], [1, 2, 1]);
+  v += Math.min(1, e.gol * 0.5) + (e.ass ? 0.25 : 0) - (e.esp ? 1 : 0);
+  v = Math.min(9, Math.max(3.5, arrotonda05(v)));
+  const bonus = [], add = (pt, testo) => { if (pt) bonus.push({ pt, testo }); };
+  add(3 * e.gol, e.gol ? `⚽×${e.gol}` : ""); add(e.ass, e.ass ? `👟×${e.ass}` : "");
+  add(-0.5 * e.amm, e.amm ? "🟨" : ""); add(-1 * e.esp, e.esp ? "🟥" : "");
+  add(-2 * e.aut, e.aut ? "autogol" : ""); add(-3 * e.rigSb, e.rigSb ? "❌ rig." : ""); add(3 * e.rigPar, e.rigPar ? "🧤 rig." : "");
+  if (info.r === "P") { add(-r.subiti, r.subiti ? `-${r.subiti} gol subiti` : ""); if (reg.imbattuto && r.subiti === 0) add(1, "imbattuto"); }
+  const fv = v + bonus.reduce((a, b) => a + b.pt, 0);
+  return { voto: v, fv, bonus };
+}
+
+function schieraFanta(nomi, idx) {
+  // giocatori disponibili (nel listone e non indisponibili), con i loro dati
+  const disp = nomi.map(n => idx[n]).filter(x => x && !INDISP.has(x.sq + "|" + x.n));
+  const per = { P: [], D: [], C: [], A: [] };
+  disp.forEach(x => per[x.r] && per[x.r].push(x));
+  Object.values(per).forEach(l => l.sort((a, b) => b.p - a.p));
+  let meglio = null;
+  for (const m of MODULI) {
+    const [d, c, a] = m.split("-").map(Number);
+    if (per.P.length < 1 || per.D.length < d || per.C.length < c || per.A.length < a) continue;
+    const tit = [per.P[0], ...per.D.slice(0, d), ...per.C.slice(0, c), ...per.A.slice(0, a)];
+    const forza = tit.reduce((s, x) => s + x.p, 0);
+    if (!meglio || forza > meglio.forza) meglio = { modulo: m, tit, forza };
+  }
+  if (!meglio) return null;
+  const panchina = disp.filter(x => !meglio.tit.includes(x));
+  return { modulo: meglio.modulo, titolari: meglio.tit, panchina };
+}
+
+function giocaSquadraFanta(nome, nomi, sim, idx, reg) {
+  const sch = schieraFanta(nomi, idx);
+  if (!sch) return { nome, errore: true };
+  const panca = sch.panchina.map(x => ({ x, usato: false }));
+  let cambi = 0;
+  const righe = sch.titolari.map(x => {
+    const res = fantaVoto(x, sim, reg);
+    if (res) return { x, res };
+    // senza voto: entra il primo della panchina dello stesso ruolo che ha giocato (massimo 3 cambi)
+    if (cambi < 3) for (const b of panca) {
+      if (b.usato || b.x.r !== x.r) continue;
+      const rb = fantaVoto(b.x, sim, reg); b.usato = true;
+      if (rb) { cambi++; return { x: b.x, res: rb, entra: true, perChi: x.n }; }
+    }
+    return { x, res: null };
+  });
+  const tot = righe.reduce((s, r) => s + (r.res ? r.res.fv : 0), 0);
+  const golFanta = tot < reg.soglia ? 0 : 1 + Math.floor((tot - reg.soglia) / reg.passo);
+  return { nome, modulo: sch.modulo, righe, tot: Math.round(tot * 2) / 2, gol: golFanta };
+}
+
+function sfidaFanta() {
+  const dati = mem.get("fanta", null); if (!dati) return;
+  const a = $("#fanta-a").value, b = $("#fanta-b").value, reg = regoleFanta();
+  const idx = indiceListone(), sim = simulaGiornata();
+  const A = giocaSquadraFanta(a, dati.squadre[a], sim, idx, reg), B = giocaSquadraFanta(b, dati.squadre[b], sim, idx, reg);
+  return { A, B, giornata: sim.giornata, lega: dati.lega };
+}
+
+function mostraSfidaFanta(f) {
+  const col = S => S.errore ? `<div class="colonna"><h4>${esc(S.nome)}</h4><div class="nessuno">Rosa incompleta</div></div>` :
+    `<div class="colonna formazione"><h4>${esc(S.nome)} · ${S.modulo}</h4>${S.righe.map(r => r.res
+      ? `<div class="gioc ${r.entra ? "entra" : ""}"><span class="r">${r.x.r}</span><span>${esc(r.x.n)}</span><span class="fv">${r.res.fv}</span>
+         <span class="det">${r.entra ? "↑ per " + esc(r.perChi) + " · " : ""}voto ${r.res.voto}${r.res.bonus.length ? " · " + r.res.bonus.map(b => b.testo).join(" ") : ""}</span></div>`
+      : `<div class="gioc sv"><span class="r">${r.x.r}</span><span>${esc(r.x.n)}</span><span class="fv">s.v.</span></div>`).join("")}</div>`;
+  const frase = f.A.gol === f.B.gol ? "Pareggio annunciato: nessuno esulta, tutti recriminano." :
+    `${f.A.gol > f.B.gol ? f.A.nome : f.B.nome}: la sfera ha scelto te.`;
+  const box = $("#responso");
+  box.innerHTML = `
+    <div class="piccolo centro">⚡ ${esc(f.lega)} · ${f.giornata}ª giornata simulata</div>
+    <div class="tabellone"><div class="sq c">${esc(f.A.nome)}</div><div class="punteggio">${f.A.gol ?? "-"} - ${f.B.gol ?? "-"}</div><div class="sq">${esc(f.B.nome)}</div></div>
+    <div class="fanta-tot"><span><b>${f.A.tot ?? "-"}</b> punti</span><span></span><span><b>${f.B.tot ?? "-"}</b> punti</span></div>
+    <p class="frase">"${esc(frase)}"</p>
+    <div class="eventi">${col(f.A)}${col(f.B)}</div>
+    <div class="fila" style="margin-top:16px">
+      <button class="bottone verde" id="cond-prof">📲 Condividi</button>
+      <button class="bottone" id="di-nuovo">🔁 Chiedi di nuovo</button>
+    </div>`;
+  $("#cond-prof").onclick = () => condividi(testoFanta(f));
+  $("#di-nuovo").onclick = interroga;
+}
+function testoFanta(f) {
+  const top = S => (S.righe || []).filter(r => r.res).sort((a, b) => b.res.fv - a.res.fv).slice(0, 3).map(r => `${r.x.n} ${r.res.fv}`).join(", ");
+  return [`🔮 L'Oracolo di ErCaciotta90 – ${f.lega}, ${f.giornata}ª giornata:`, `${f.A.nome} ${f.A.gol}-${f.B.gol} ${f.B.nome}`,
+    `(${f.A.tot} a ${f.B.tot})`, `⭐ ${f.A.nome}: ${top(f.A)}`, `⭐ ${f.B.nome}: ${top(f.B)}`, "", "Interroga anche tu l'Oracolo: " + urlSito()].join("\n");
 }
 
 // ================================================================ QUIZ
