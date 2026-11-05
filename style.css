@@ -100,3 +100,7 @@ main{max-width:640px;margin:0 auto;padding:8px 12px 24px}
 .piede{text-align:center;color:var(--tenue);font-size:.72rem;padding:10px 12px 24px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--oro);color:#1a1030;padding:10px 16px;border-radius:12px;font-weight:700;z-index:20;box-shadow:0 6px 24px rgba(0,0,0,.4)}
 @media (max-width:380px){.punteggio{font-size:2.1rem}.eventi{grid-template-columns:1fr}}
+.titolo-ev{font-size:.8rem;font-weight:800;color:var(--oro);margin:4px 0 6px;letter-spacing:.4px}
+.tag{font-size:.7rem;background:var(--fondo2);color:var(--tenue);padding:1px 6px;border-radius:6px;margin-left:2px;white-space:nowrap}
+.tag.rosso{background:rgba(239,77,90,.2);color:#ff9aa2}
+.croce{color:#ff3b4a;font-weight:900;font-size:1rem}

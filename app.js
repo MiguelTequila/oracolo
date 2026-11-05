@@ -107,39 +107,90 @@ function minuto(tardi) {
 }
 const valMin = m => m.includes("+") ? parseInt(m) + parseInt(m.split("+")[1]) / 10 : parseInt(m);
 
+// Frequenze medie in Serie A (stime arrotondate)
+const QUOTA_GOL_SU_RIGORE = 0.085;   // circa 1 gol su 12 arriva dal dischetto
+const RIGORI_FALLITI_MEDI = 0.07;    // rigori sbagliati o parati a partita
+const QUOTA_PARATI = 0.65;           // dei falliti: 2 su 3 parati, 1 su 3 fuori/palo
+const INFORTUNI_MEDI = 0.35;         // infortuni a partita che costringono al cambio
+
+function rigoristaDi(sq) {
+  const rosa = rosaDi(sq);
+  if (!rosa) return { n: "Rigorista", generico: true };
+  // il rigorista e' l'attaccante (o in mancanza il centrocampista) che vale di piu'
+  for (const r of ["A", "C"]) {
+    const c = rosa.filter(g => g.r === r);
+    if (c.length) return c.reduce((a, b) => ((b.p || 0) > (a.p || 0) ? b : a));
+  }
+  return rosa[0];
+}
+function portiereDi(sq) {
+  const rosa = rosaDi(sq), gk = rosa ? rosa.filter(g => g.r === "P") : [];
+  if (!gk.length) return { n: "il portiere", generico: true };
+  return gk.reduce((a, b) => ((b.p || 0) > (a.p || 0) ? b : a));
+}
+
 function profezia(casa, trasf, lam) {
   const { celle, pesi } = matriceRisultati(lam.lh, lam.la, lam.rho);
   const [gh, ga] = pesca(celle, pesi);
-  const espulsi = new Set(), ammoniti = {}, cartellini = [];
-  // cartellini
-  const nGialli = poisson(GIALLI_MEDI);
-  for (let i = 0; i < nGialli; i++) {
-    const sq = rnd() < 0.54 ? trasf : casa;
-    const g = pescaGiocatore(sq, PESI_GIALLO, espulsi);
-    const m = minuto(true);
-    if (!g.generico && ammoniti[g.n]) {
-      cartellini.push({ sq, n: g.n, m, tipo: "rosso2" }); espulsi.add(g.n);
-    } else { ammoniti[g.n] = true; cartellini.push({ sq, n: g.n, m, tipo: "giallo" }); }
+  const fuori = {}; // nome -> minuto da cui non e' piu' in campo
+  const inCampo = (g, m) => g.generico || !(g.n in fuori) || fuori[g.n] > valMin(m);
+  const scegli = (sq, pesiR, m) => {
+    const via = new Set(Object.keys(fuori).filter(n => fuori[n] <= valMin(m)));
+    return pescaGiocatore(sq, pesiR, via);
+  };
+  // infortuni (prima di tutto: chi si fa male esce)
+  const infortuni = [];
+  for (let i = 0, n = poisson(INFORTUNI_MEDI); i < n; i++) {
+    const sq = rnd() < 0.5 ? casa : trasf, m = minuto(false);
+    const g = scegli(sq, { P: 0.2, D: 1.2, C: 1.1, A: 1 }, m);
+    if (!g.generico && g.n in fuori) continue;
+    infortuni.push({ sq, n: g.n, m }); if (!g.generico) fuori[g.n] = valMin(m);
   }
+  // cartellini: prima l'eventuale rosso diretto, poi i gialli
+  const ammoniti = {}, cartellini = [];
   if (rnd() < PROB_ROSSO_DIRETTO) {
-    const sq = rnd() < 0.5 ? casa : trasf; const g = pescaGiocatore(sq, { D: 1.6, C: 1.3, A: .8, P: .3 }, espulsi);
-    cartellini.push({ sq, n: g.n, m: minuto(true), tipo: "rosso" }); espulsi.add(g.n);
+    const sq = rnd() < 0.5 ? casa : trasf, m = minuto(true), g = scegli(sq, { D: 1.6, C: 1.3, A: .8, P: .3 }, m);
+    if (inCampo(g, m)) { cartellini.push({ sq, n: g.n, m, tipo: "rosso" }); if (!g.generico) fuori[g.n] = valMin(m); }
   }
-  // gol (chi e' gia' espulso non segna dopo)
+
+  const eventiGialli = [];
+  for (let i = 0, n = poisson(GIALLI_MEDI); i < n; i++) eventiGialli.push(minuto(true));
+  eventiGialli.sort((a, b) => valMin(a) - valMin(b)).forEach(m => {
+    const sq = rnd() < 0.54 ? trasf : casa, g = scegli(sq, PESI_GIALLO, m);
+    if (!inCampo(g, m)) return;
+    // chi e' gia' ammonito di solito si controlla: 6 volte su 10 il giallo va a un altro
+    if (!g.generico && ammoniti[g.n] && rnd() < 0.6) { const altro = scegli(sq, PESI_GIALLO, m); if (!ammoniti[altro.n]) { ammoniti[altro.n] = true; cartellini.push({ sq, n: altro.n, m, tipo: "giallo" }); return; } }
+    if (!g.generico && ammoniti[g.n]) {
+      // se aveva un rosso diretto piu' tardi, quel rosso non c'e' piu': e' gia' fuori
+      const k = cartellini.findIndex(c => c.n === g.n && c.tipo === "rosso"); if (k >= 0) cartellini.splice(k, 1);
+      cartellini.push({ sq, n: g.n, m, tipo: "rosso2" }); fuori[g.n] = valMin(m);
+    }
+    else { ammoniti[g.n] = true; cartellini.push({ sq, n: g.n, m, tipo: "giallo" }); }
+  });
+  // gol, alcuni su rigore
   const gol = [];
   const segna = (sq, contro) => {
     const m = minuto(false);
-    if (rnd() < 0.03) { const g = pescaGiocatore(contro, { D: 3, C: 1, A: .3, P: .2 }); gol.push({ sq, n: g.n + " (aut.)", m }); return; }
-    let g, tent = 0;
-    do { g = pescaGiocatore(sq, PESI_GOL); tent++; }
-    while (tent < 8 && cartellini.some(c => c.n === g.n && c.tipo !== "giallo" && valMin(c.m) < valMin(m)));
-    gol.push({ sq, n: g.n, m });
+    if (rnd() < 0.03) { const g = scegli(contro, { D: 3, C: 1, A: .3, P: .2 }, m); gol.push({ sq, n: g.n, m, extra: "aut." }); return; }
+    if (rnd() < QUOTA_GOL_SU_RIGORE) {
+      const r = rigoristaDi(sq);
+      if (inCampo(r, m)) { gol.push({ sq, n: r.n, m, extra: "rig." }); return; }
+    }
+    gol.push({ sq, n: scegli(sq, PESI_GOL, m).n, m });
   };
   for (let i = 0; i < gh; i++) segna(casa, trasf);
   for (let i = 0; i < ga; i++) segna(trasf, casa);
-  gol.sort((a, b) => valMin(a.m) - valMin(b.m));
-  cartellini.sort((a, b) => valMin(a.m) - valMin(b.m));
-  return { casa, trasf, gh, ga, gol, cartellini, frase: fraseOracolo(gh, ga, casa, trasf) };
+  // rigori sbagliati o parati (non cambiano il risultato)
+  const rigoriFalliti = [];
+  for (let i = 0, n = poisson(RIGORI_FALLITI_MEDI); i < n; i++) {
+    const sq = rnd() < lam.lh / (lam.lh + lam.la) ? casa : trasf, contro = sq === casa ? trasf : casa, m = minuto(false);
+    let r = rigoristaDi(sq); if (!inCampo(r, m)) r = scegli(sq, PESI_GOL, m);
+    const parato = rnd() < QUOTA_PARATI, gk = portiereDi(contro);
+    rigoriFalliti.push({ sq, n: r.n, m, esito: parato ? "parato" : pesca(["fuori", "palo", "traversa"], [3, 2, 1]), portiere: parato ? gk.n : null, sqPortiere: contro });
+  }
+  const ord = (a, b) => valMin(a.m) - valMin(b.m);
+  gol.sort(ord); cartellini.sort(ord); infortuni.sort(ord); rigoriFalliti.sort(ord);
+  return { casa, trasf, gh, ga, gol, cartellini, infortuni, rigoriFalliti, frase: fraseOracolo(gh, ga, casa, trasf) };
 }
 
 function fraseOracolo(gh, ga, casa, trasf) {
@@ -163,11 +214,12 @@ function fraseOracolo(gh, ga, casa, trasf) {
 
 function testoCondivisione(p) {
   const r = [`🔮 L'Oracolo di ErCaciotta90 ha parlato:`, `${p.casa} ${p.gh}-${p.ga} ${p.trasf}`];
-  if (p.gol.length) r.push("⚽ " + p.gol.map(g => `${g.n} ${g.m}'`).join(", "));
-  const rossi = p.cartellini.filter(c => c.tipo !== "giallo");
-  const gialli = p.cartellini.filter(c => c.tipo === "giallo");
+  if (p.gol.length) r.push("⚽ " + p.gol.map(g => `${g.n}${g.extra ? " (" + g.extra + ")" : ""} ${g.m}'`).join(", "));
+  const gialli = p.cartellini.filter(c => c.tipo === "giallo"), rossi = p.cartellini.filter(c => c.tipo !== "giallo");
   if (gialli.length) r.push("🟨 " + gialli.map(c => c.n).join(", "));
-  if (rossi.length) r.push("🟥 " + rossi.map(c => c.n).join(", "));
+  if (rossi.length) r.push("🟥 " + rossi.map(c => `${c.n} ${c.m}'`).join(", "));
+  p.rigoriFalliti.forEach(x => r.push(x.esito === "parato" ? `🧤 ${x.portiere} para il rigore a ${x.n} (${x.m}')` : `❌ ${x.n} sbaglia il rigore, ${x.esito} (${x.m}')`));
+  if (p.infortuni.length) r.push("🚑 " + p.infortuni.map(x => `${x.n} ${x.m}'`).join(", "));
   r.push(`"${p.frase}"`, "", "Interroga anche tu l'Oracolo: " + urlSito());
   return r.join("\n");
 }
@@ -259,15 +311,25 @@ function mostraProfezia(p) {
     const it = lista.filter(x => x.sq === sq);
     return `<div class="colonna"><h4>${esc(sq)}</h4>${it.length ? it.map(fmt).join("") : `<div class="nessuno">—</div>`}</div>`;
   };
-  const fGol = g => `<div class="ev"><span class="min">${g.m}'</span>⚽ ${esc(g.n)}</div>`;
+  const sezione = (titolo, lista, fmt) => lista.length
+    ? `<div class="sezione-ev"><div class="titolo-ev">${titolo}</div><div class="eventi">${colonna(p.casa, lista, fmt)}${colonna(p.trasf, lista, fmt)}</div></div>` : "";
+  const ev = (m, ico, testo) => `<div class="ev"><span class="min">${m}'</span>${ico} ${testo}</div>`;
+  const fGol = g => ev(g.m, "⚽", esc(g.n) + (g.extra ? ` <span class="tag">${g.extra === "rig." ? "su rigore" : "autogol"}</span>` : ""));
   const icona = { giallo: "🟨", rosso: "🟥", rosso2: "🟨🟥" };
-  const fCart = c => `<div class="ev"><span class="min">${c.m}'</span>${icona[c.tipo]} ${esc(c.n)}</div>`;
+  const fCart = c => ev(c.m, icona[c.tipo], esc(c.n) + (c.tipo === "rosso" ? ` <span class="tag rosso">rosso diretto</span>` : c.tipo === "rosso2" ? ` <span class="tag rosso">espulso</span>` : ""));
+  const fRig = x => x.esito === "parato"
+    ? ev(x.m, "🧤", `Rigore di ${esc(x.n)} <b>parato</b> da ${esc(x.portiere)}`)
+    : ev(x.m, "❌", `${esc(x.n)} sbaglia il rigore <span class="tag">${x.esito}</span>`);
+  const fInf = x => ev(x.m, `<span class="croce">✚</span>`, `${esc(x.n)} <span class="tag">esce infortunato</span>`);
   const box = $("#responso");
   box.innerHTML = `
     <div class="tabellone"><div class="sq c">${esc(p.casa)}</div><div class="punteggio">${p.gh} - ${p.ga}</div><div class="sq">${esc(p.trasf)}</div></div>
     <p class="frase">"${esc(p.frase)}"</p>
-    ${p.gol.length ? `<div class="sezione-ev"><div class="eventi">${colonna(p.casa, p.gol, fGol)}${colonna(p.trasf, p.gol, fGol)}</div></div>` : ""}
-    <div class="sezione-ev"><div class="eventi">${colonna(p.casa, p.cartellini, fCart)}${colonna(p.trasf, p.cartellini, fCart)}</div></div>
+    ${sezione("⚽ Marcatori", p.gol, fGol)}
+    ${sezione("🟨 Cartellini", p.cartellini, fCart)}
+    ${sezione("🎯 Rigori falliti", p.rigoriFalliti, fRig)}
+    ${sezione("✚ Infortuni", p.infortuni, fInf)}
+    ${!p.cartellini.length ? `<p class="nessuno centro">Partita correttissima: nessun cartellino.</p>` : ""}
     <div class="fila" style="margin-top:16px">
       <button class="bottone verde" id="cond-prof">📲 Condividi</button>
       <button class="bottone" id="di-nuovo">🔁 Chiedi di nuovo</button>
