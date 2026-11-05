@@ -14,7 +14,12 @@ jobs:
         run: |
           mkdir -p sonda
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
-          for p in "" "rose" "squadre" "classifica" "calendario"; do
+          curl -sL -m 60 -A "$UA" -o sonda/main.js "https://leghe.fantacalcio.it/main-GLRJLGUO.js"; echo "main.js $(wc -c < sonda/main.js)" | tee -a sonda/esito.txt
+          grep -oE '"(/v[0-9]+/)?[a-zA-Z_/{}$.-]*(rose|squadre|leghe|league|teams|rosters?)[a-zA-Z_/{}$.-]*"' sonda/main.js | sort -u | head -80 > sonda/endpoint.txt || true
+          grep -oE '.{120}apileague.{200}' sonda/main.js | head -5 > sonda/apileague.txt || true
+          grep -oE '.{100}(app_key|appKey|x-auth|x-api|Authorization|app-key).{160}' sonda/main.js | head -12 > sonda/header.txt || true
+          rm -f sonda/main.js
+          for p in ""; do
             f="sonda/pagina_${p:-home}.html"
             code=$(curl -sL -m 30 -A "$UA" -o "$f" -w "%{http_code} %{url_effective}" "https://leghe.fantacalcio.it/serie-f-orco/$p")
             echo "$p -> $code $(wc -c < "$f") byte" | tee -a sonda/esito.txt
