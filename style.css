@@ -135,3 +135,10 @@ main{max-width:640px;margin:0 auto;padding:8px 12px 24px}
 .gioc .det{grid-column:2/-1;color:var(--tenue);font-size:.72rem}
 .gioc.sv{opacity:.45}
 .gioc.entra .r{color:var(--verde)}
+.profezie{display:grid;gap:8px}
+.profezia{background:var(--fondo2);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.profezia .pq{font-size:.88rem}
+.profezia .pr{text-align:right}
+.profezia.aperta{border:1px solid rgba(240,190,80,.35);animation:svela .4s ease}
+.profezia.aperta b{color:var(--oro2)}
+.bottone.svela{padding:8px 10px;font-size:.8rem;white-space:nowrap}

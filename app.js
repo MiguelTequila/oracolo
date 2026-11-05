@@ -458,9 +458,11 @@ function disegnaPannelloFanta() {
           <label class="spunta"><input type="checkbox" id="r-imb" ${reg.imbattuto ? "checked" : ""}> Portiere imbattuto +1</label>
         </div>
       </details>
+      <button class="bottone" id="prof-stagione" style="width:100%;margin-top:10px">🔮 Profezie della stagione</button>
       ${dati.mancanti && dati.mancanti.length ? `<p class="piccolo">⚠️ ${dati.mancanti.length} giocatori non sono nel listone (ceduti o fuori lista) e non giocano: ${esc(dati.mancanti.slice(0, 6).join(", "))}${dati.mancanti.length > 6 ? "…" : ""}</p>` : ""}
     </div>`;
     $("#fanta-a").onchange = $("#fanta-b").onchange = aggiornaBottone;
+    $("#prof-stagione").onclick = mostraProfezieStagione;
     $("#fanta-cambia").onclick = () => { mem.set("fanta", null); disegnaPannelloFanta(); aggiornaBottone(); };
     const salvaReg = () => mem.set("fantaRegole", { soglia: +$("#r-soglia").value || 66, passo: +$("#r-passo").value || 6, imbattuto: $("#r-imb").checked });
     ["#r-soglia", "#r-passo", "#r-imb"].forEach(id => $(id).onchange = salvaReg);
@@ -594,6 +596,81 @@ function testoFanta(f) {
   const top = S => (S.righe || []).filter(r => r.res).sort((a, b) => b.res.fv - a.res.fv).slice(0, 3).map(r => `${r.x.n} ${r.res.fv}`).join(", ");
   return [`🔮 L'Oracolo di ErCaciotta90 – ${f.lega}, ${f.giornata}ª giornata:`, `${f.A.nome} ${f.A.gol}-${f.B.gol} ${f.B.nome}`,
     `(${f.A.tot} a ${f.B.tot})`, `⭐ ${f.A.nome}: ${top(f.A)}`, `⭐ ${f.B.nome}: ${top(f.B)}`, "", "Interroga anche tu l'Oracolo: " + urlSito()].join("\n");
+}
+
+
+// ---------- Profezie di stagione: una sola per lega, uguale per tutti
+function hashTesto(t) { let h = 2166136261; for (const c of t) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+function forzaStagione(nomi, idx) {
+  const per = { P: [], D: [], C: [], A: [] };
+  nomi.map(n => idx[n]).filter(Boolean).forEach(x => per[x.r] && per[x.r].push(x.p));
+  Object.values(per).forEach(l => l.sort((a, b) => b - a));
+  const somma = (l, k) => l.slice(0, k).reduce((a, b) => a + b, 0);
+  const xi = somma(per.P, 1) + somma(per.D, 3) + somma(per.C, 4) + somma(per.A, 3); // 3-4-3
+  const tutti = Object.values(per).flat().reduce((a, b) => a + b, 0);
+  return xi + 0.15 * (tutti - xi); // conta anche la panchina, ma meno
+}
+const DOMANDE_STAGIONE = [
+  { id: "scudetto", ico: "🏆", q: "Chi vincerà il campionato 2026/27?", tipo: "forte", T: 2.5 },
+  { id: "coppa", ico: "🥇", q: "Chi alzerà la Coppa?", tipo: "forte", T: 6 },
+  { id: "ultimo", ico: "🪣", q: "Chi arriverà ultimo?", tipo: "debole", T: 2.5 },
+  { id: "fortuna", ico: "🍀", q: "Chi avrà più fortuna?", tipo: "caso" },
+  { id: "sfortuna", ico: "🐈‍⬛", q: "Chi avrà più sfortuna?", tipo: "caso" },
+  { id: "rimonta", ico: "🚀", q: "La rimonta più incredibile?", tipo: "debole", T: 8 },
+  { id: "formazioni", ico: "😴", q: "Chi dimenticherà più formazioni?", tipo: "caso" },
+  { id: "bomber", ico: "⚽", q: "Il bomber della lega?", tipo: "giocatore", ruoli: ["A"], pot: 2.5 },
+  { id: "flop", ico: "💸", q: "Il flop della stagione?", tipo: "giocatore", ruoli: ["A", "C"], pot: 1.5, soloBig: true },
+  { id: "sorpresa", ico: "✨", q: "La sorpresa dell'anno?", tipo: "giocatore", ruoli: ["C", "A", "D"], pot: -1, soloPiccoli: true },
+];
+function profezieStagione(dati) {
+  const idx = indiceListone(), nomi = Object.keys(dati.squadre).sort();
+  const seme = hashTesto(dati.lega + "|" + nomi.join("|") + "|2026-27");
+  const r = rngSeed(seme), forze = nomi.map(n => forzaStagione(dati.squadre[n], idx));
+  const media = forze.reduce((a, b) => a + b, 0) / forze.length, usati = new Set();
+  const out = [];
+  for (const d of DOMANDE_STAGIONE) {
+    let risposta, dettaglio = "";
+    if (d.tipo === "giocatore") {
+      const cand = [];
+      nomi.forEach(sq => dati.squadre[sq].forEach(n => { const x = idx[n]; if (x && d.ruoli.includes(x.r) && (!d.soloBig || x.p >= 4) && (!d.soloPiccoli || x.p <= 2)) cand.push({ x, sq }); }));
+      if (!cand.length) continue;
+      const scelto = pesca(cand, cand.map(c => Math.pow(c.x.p, d.pot)), r);
+      risposta = scelto.x.n; dettaglio = scelto.sq;
+    } else {
+      // ogni squadra riceve una sola profezia (la Coppa puo' andare anche a chi vince lo scudetto)
+      let libere = nomi.map((n, i) => ({ n, f: forze[i] })).filter(c => d.id === "coppa" || !usati.has(c.n));
+      if (!libere.length) libere = nomi.map((n, i) => ({ n, f: forze[i] }));
+      const pesi = libere.map(c => d.tipo === "caso" ? 1 : Math.exp((d.tipo === "forte" ? 1 : -1) * (c.f - media) / d.T));
+      risposta = pesca(libere, pesi, r).n;
+      if (d.id !== "coppa") usati.add(risposta);
+    }
+    out.push({ ...d, risposta, dettaglio });
+  }
+  return out;
+}
+function mostraProfezieStagione() {
+  const dati = mem.get("fanta", null); if (!dati) return;
+  const lista = profezieStagione(dati), box = $("#responso"), svelate = new Set(mem.get("svelate:" + dati.lega, []));
+  box.hidden = false;
+  const voce = (p, i) => `<div class="profezia ${svelate.has(p.id) ? "aperta" : ""}" data-i="${i}">
+      <div class="pq">${p.ico} ${esc(p.q)}</div>
+      <div class="pr">${svelate.has(p.id) ? `<b>${esc(p.risposta)}</b>${p.dettaglio ? ` <span class="tag">${esc(p.dettaglio)}</span>` : ""}` : `<button class="bottone svela" data-i="${i}">🔮 Svela</button>`}</div></div>`;
+  box.innerHTML = `<div class="piccolo centro">⚡ ${esc(dati.lega)} · profezie ufficiali 2026/27</div>
+    <p class="frase">"Il destino della lega è scritto una volta sola. Uguale per tutti, senza appello."</p>
+    <div class="profezie">${lista.map(voce).join("")}</div>
+    <div class="fila" style="margin-top:14px">
+      <button class="bottone oro" id="svela-tutto">✨ Svela tutto</button>
+      <button class="bottone verde" id="cond-stag">📲 Condividi</button>
+    </div>`;
+  const salva = () => mem.set("svelate:" + dati.lega, [...svelate]);
+  box.querySelectorAll(".svela").forEach(b => b.onclick = () => { svelate.add(lista[+b.dataset.i].id); salva(); mostraProfezieStagione(); });
+  $("#svela-tutto").onclick = () => { lista.forEach(p => svelate.add(p.id)); salva(); mostraProfezieStagione(); };
+  $("#cond-stag").onclick = () => {
+    const vis = lista.filter(p => svelate.has(p.id));
+    if (!vis.length) { toast("Svela almeno una profezia"); return; }
+    condividi([`🔮 L'Oracolo di ErCaciotta90 ha parlato – ${dati.lega} 2026/27:`, ...vis.map(p => `${p.ico} ${p.q} ${p.risposta}${p.dettaglio ? " (" + p.dettaglio + ")" : ""}`), "", "Scopri il destino della tua lega: " + urlSito()].join("\n"));
+  };
+  box.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 // ================================================================ QUIZ
