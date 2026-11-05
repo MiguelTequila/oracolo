@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>L'Oracolo del Campionato</title>
+<meta name="description" content="Clicca, e l'Oracolo ti rivela risultato, marcatori e ammonizioni della prossima giornata. Più il quiz del giorno per veri intenditori.">
+<meta name="theme-color" content="#1a1030">
+<meta property="og:title" content="L'Oracolo del Campionato">
+<meta property="og:description" content="Risultati, marcatori e cartellini svelati dall'Oracolo. E tu, quante ne sai? Quiz del giorno.">
+<meta property="og:image" content="icons/icon-512.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="testata">
+  <div class="logo">🔮</div>
+  <div>
+    <h1>L'Oracolo del Campionato</h1>
+    <p class="sottotitolo">Chiedi, e ti sarà rivelato.</p>
+  </div>
+</header>
+
+<nav class="schede" role="tablist">
+  <button class="scheda attiva" data-vai="oracolo" role="tab">🔮 Oracolo</button>
+  <button class="scheda" data-vai="quiz" role="tab">🧠 Quiz del giorno</button>
+  <button class="scheda" data-vai="info" role="tab">ℹ️ Info</button>
+</nav>
+
+<main>
+  <!-- ================= ORACOLO ================= -->
+  <section id="vista-oracolo" class="vista attiva">
+    <div class="interruttore">
+      <button class="int attivo" data-modo="giornata">Prossime partite</button>
+      <button class="int" data-modo="libera">Sfida libera</button>
+    </div>
+
+    <div id="pannello-giornata">
+      <div class="riga-giornata">
+        <button id="g-prec" class="freccia" aria-label="Giornata precedente">‹</button>
+        <div id="g-titolo" class="g-titolo">Giornata</div>
+        <button id="g-succ" class="freccia" aria-label="Giornata successiva">›</button>
+      </div>
+      <div id="lista-partite" class="lista-partite"></div>
+    </div>
+
+    <div id="pannello-libera" hidden>
+      <div class="sfida">
+        <label>Casa<select id="sel-casa"></select></label>
+        <span class="vs">VS</span>
+        <label>Trasferta<select id="sel-trasf"></select></label>
+      </div>
+    </div>
+
+    <button id="interroga" class="bottone-grande" disabled>Scegli una partita</button>
+
+    <div id="responso" class="responso" hidden></div>
+    <div id="avviso-rose" class="avviso" hidden></div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section id="vista-quiz" class="vista">
+    <div id="quiz-home"></div>
+    <div id="quiz-gioco" hidden></div>
+  </section>
+
+  <!-- ================= INFO ================= -->
+  <section id="vista-info" class="vista">
+    <div class="carta">
+      <h2>Come funziona</h2>
+      <p><b>L'Oracolo</b> non tira a caso. Per ogni partita conosce i gol attesi di entrambe le squadre, calcolati da un modello statistico su gol fatti, subiti e forma. A ogni clic pesca un risultato da quella distribuzione: la favorita vince più spesso, ma le sorprese possono uscire. Proprio come nel calcio vero.</p>
+      <p>Marcatori e ammonizioni escono dalla rosa vera: gli attaccanti segnano più spesso, difensori e mediani prendono più gialli.</p>
+      <p><b>Il Quiz del giorno</b> ha 5 domande uguali per tutti, dalla facile alla "da veri malati", con 15 secondi l'una. Si gioca una volta al giorno: confronta il punteggio con la tua lega condividendo il risultato.</p>
+      <p><b>Modalità Leggenda</b>: 10 domande solo per esperti. Si sblocca dopo 3 quiz del giorno.</p>
+      <h2>Installa l'app</h2>
+      <p>Su Android apri il menu ⋮ di Chrome e tocca <i>Aggiungi a schermata Home</i>. Su iPhone tocca Condividi in Safari e poi <i>Aggiungi alla schermata Home</i>.</p>
+      <h2>Avvertenze</h2>
+      <p class="piccolo">Sito amatoriale e gratuito, non affiliato né collegato alla Lega Serie A, alla FIGC o ai club. Le previsioni sono generate per puro intrattenimento e non sono consigli di scommessa. I nomi di squadre e calciatori sono usati solo a scopo informativo.</p>
+      <p class="piccolo">Dati: partite e gol attesi dal Simulatore Calcio Pro (football-data.org). Rose da Wikipedia (licenza CC BY-SA) o football-data.org. <span id="info-agg"></span></p>
+    </div>
+  </section>
+
+  <div id="spazio-pubblicita" class="spazio-pubblicita" hidden></div>
+</main>
+
+<footer class="piede">Solo intrattenimento · Nessuna scommessa · Non affiliato alla Lega Serie A</footer>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="config.js"></script>
+<script src="domande.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

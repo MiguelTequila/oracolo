@@ -1,0 +1,52 @@
+name: Aggiorna dati Oracolo
+
+# Gira ogni giorno alle 17:40 UTC, cioe' dopo il giro delle 17:00 del
+# simulatore-calcio-pro da cui legge le partite. NON usa The Odds API:
+# non consuma crediti. FDKEY e' facoltativo (serve solo per le rose).
+on:
+  schedule:
+    - cron: '40 17 * * *'
+  workflow_dispatch:
+    inputs:
+      forza_rose:
+        description: 'Riscarica subito le rose (es. dopo il mercato di gennaio)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggiorna-dati
+  cancel-in-progress: false
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - name: Aggiorna partite e rose
+        env:
+          FDKEY: ${{ secrets.FDKEY }}
+        run: |
+          if [ "${{ inputs.forza_rose }}" = "true" ]; then
+            python scripts/aggiorna_dati.py --forza-rose
+          else
+            python scripts/aggiorna_dati.py
+          fi
+      - name: Salva i dati
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet && exit 0
+          git commit -m "Aggiornamento dati Oracolo"
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push && exit 0
+            sleep 5
+          done
+          exit 1
