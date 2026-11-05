@@ -257,6 +257,12 @@ def aggiorna_rose(forza=False):
             finali[sq] = gioc
         else:
             print(f"  {sq}: rosa troppo corta ({len(gioc)}), tengo la precedente")
+    # Rose inserite a mano (data/rose_manuali.json): vincono sempre su quelle scaricate
+    manuali = carica("rose_manuali.json", {})
+    for sq, gioc in manuali.items():
+        if isinstance(gioc, list) and gioc:
+            finali[sq] = gioc
+            print(f"  {sq}: uso la rosa manuale ({len(gioc)} giocatori)")
     salva("rose.json", {"aggiornato": datetime.now(timezone.utc).isoformat(),
                         "fonte": fonte, "rose": finali})
     print(f"Rose salvate: {len(finali)} squadre (fonte {fonte})")
