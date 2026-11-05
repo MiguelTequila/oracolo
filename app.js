@@ -425,7 +425,17 @@ async function importaRoseFanta(file) {
   return dati;
 }
 
-function regoleFanta() { return Object.assign({}, FANTA_DEF, mem.get("fantaRegole", {})); }
+// Regole note per lega (si applicano da sole quando si carica il file di quella lega)
+const REGOLE_LEGHE = { "serie f orco": { soglia: 66, passo: 5, imbattuto: true } };
+function chiaveLega() { const d = mem.get("fanta", null); return d ? normNome(d.lega) : ""; }
+function regoleFanta() {
+  const k = chiaveLega();
+  return Object.assign({}, FANTA_DEF, REGOLE_LEGHE[k] || {}, mem.get("fantaRegole:" + k, {}));
+}
+function testoRegole(r) {
+  const g = [0, 1, 2, 3].map(i => r.soglia + i * r.passo).join(" · ");
+  return `Gol a ${g}…${r.imbattuto ? " · portiere imbattuto +1" : ""}`;
+}
 
 function disegnaPannelloFanta() {
   const box = $("#pannello-fanta"), dati = mem.get("fanta", null), reg = regoleFanta();
@@ -451,7 +461,7 @@ function disegnaPannelloFanta() {
         <label>Casa<select id="fanta-a">${opz(0)}</select></label><span class="vs">VS</span>
         <label>Trasferta<select id="fanta-b">${opz(1)}</select></label>
       </div>
-      <details style="margin-top:8px"><summary class="piccolo">⚙️ Regole della lega</summary>
+      <details style="margin-top:8px"><summary class="piccolo">⚙️ Regole: <b id="riassunto-regole">${esc(testoRegole(reg))}</b> · cambia</summary>
         <div class="regole">
           <label>Primo gol a<input type="number" id="r-soglia" min="50" max="80" step="1" value="${reg.soglia}"></label>
           <label>Ogni gol in più<input type="number" id="r-passo" min="2" max="10" step="0.5" value="${reg.passo}"></label>
@@ -464,7 +474,7 @@ function disegnaPannelloFanta() {
     $("#fanta-a").onchange = $("#fanta-b").onchange = aggiornaBottone;
     $("#prof-stagione").onclick = mostraProfezieStagione;
     $("#fanta-cambia").onclick = () => { mem.set("fanta", null); disegnaPannelloFanta(); aggiornaBottone(); };
-    const salvaReg = () => mem.set("fantaRegole", { soglia: +$("#r-soglia").value || 66, passo: +$("#r-passo").value || 6, imbattuto: $("#r-imb").checked });
+    const salvaReg = () => { mem.set("fantaRegole:" + chiaveLega(), { soglia: +$("#r-soglia").value || 66, passo: +$("#r-passo").value || 6, imbattuto: $("#r-imb").checked }); $("#riassunto-regole").textContent = testoRegole(regoleFanta()); };
     ["#r-soglia", "#r-passo", "#r-imb"].forEach(id => $(id).onchange = salvaReg);
   }
   const f = $("#file-fanta");
@@ -567,7 +577,7 @@ function sfidaFanta() {
   const a = $("#fanta-a").value, b = $("#fanta-b").value, reg = regoleFanta();
   const idx = indiceListone(), sim = simulaGiornata();
   const A = giocaSquadraFanta(a, dati.squadre[a], sim, idx, reg), B = giocaSquadraFanta(b, dati.squadre[b], sim, idx, reg);
-  return { A, B, giornata: sim.giornata, lega: dati.lega };
+  return { A, B, giornata: sim.giornata, lega: dati.lega, regole: reg };
 }
 
 function mostraSfidaFanta(f) {
@@ -580,7 +590,7 @@ function mostraSfidaFanta(f) {
     `${f.A.gol > f.B.gol ? f.A.nome : f.B.nome}: la sfera ha scelto te.`;
   const box = $("#responso");
   box.innerHTML = `
-    <div class="piccolo centro">⚡ ${esc(f.lega)} · ${f.giornata}ª giornata simulata</div>
+    <div class="piccolo centro">⚡ ${esc(f.lega)} · ${f.giornata}ª giornata simulata<br>${esc(testoRegole(f.regole))}</div>
     <div class="tabellone"><div class="sq c">${esc(f.A.nome)}</div><div class="punteggio">${f.A.gol ?? "-"} - ${f.B.gol ?? "-"}</div><div class="sq">${esc(f.B.nome)}</div></div>
     <div class="fanta-tot"><span><b>${f.A.tot ?? "-"}</b> punti</span><span></span><span><b>${f.B.tot ?? "-"}</b> punti</span></div>
     <p class="frase">"${esc(frase)}"</p>
