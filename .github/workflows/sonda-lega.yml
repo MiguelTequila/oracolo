@@ -1,0 +1,26 @@
+name: Sonda lega (prova temporanea)
+on:
+  push:
+    paths: ['.github/workflows/sonda-lega.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sonda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Legge le pagine della lega
+        run: |
+          mkdir -p sonda
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
+          for p in "" "rose" "squadre" "classifica" "calendario"; do
+            f="sonda/pagina_${p:-home}.html"
+            code=$(curl -sL -m 30 -A "$UA" -o "$f" -w "%{http_code} %{url_effective}" "https://leghe.fantacalcio.it/serie-f-orco/$p")
+            echo "$p -> $code $(wc -c < "$f") byte" | tee -a sonda/esito.txt
+          done
+      - name: Salva
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add sonda/ && git commit -m "Sonda lega: risultati" && git pull --rebase origin main && git push
