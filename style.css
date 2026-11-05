@@ -114,3 +114,4 @@ main{max-width:640px;margin:0 auto;padding:8px 12px 24px}
 .medaglia{font-size:1.1rem}
 .esito-cl{margin:10px 0 0;font-size:.85rem}
 .due-campi{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+.assist{color:var(--tenue);font-size:.82rem;white-space:nowrap}

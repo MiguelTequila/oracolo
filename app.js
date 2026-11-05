@@ -114,7 +114,9 @@ const valMin = m => m.includes("+") ? parseInt(m) + parseInt(m.split("+")[1]) / 
 const QUOTA_GOL_SU_RIGORE = 0.085;   // circa 1 gol su 12 arriva dal dischetto
 const RIGORI_FALLITI_MEDI = 0.07;    // rigori sbagliati o parati a partita
 const QUOTA_PARATI = 0.65;           // dei falliti: 2 su 3 parati, 1 su 3 fuori/palo
-const INFORTUNI_MEDI = 0.35;         // infortuni a partita che costringono al cambio
+const INFORTUNI_MEDI = 0.35;
+const QUOTA_GOL_CON_ASSIST = 0.72;   // circa 7 gol su 10 hanno un assist
+const PESI_ASSIST = { C: 3, A: 2, D: 1.3, P: 0.05 };         // infortuni a partita che costringono al cambio
 
 function rigoristaDi(sq) {
   const rosa = rosaDi(sq);
@@ -181,7 +183,14 @@ function profezia(casa, trasf, lam) {
       const r = rigoristaDi(sq);
       if (inCampo(r, m)) { gol.push({ sq, n: r.n, m, extra: "rig." }); return; }
     }
-    gol.push({ sq, n: scegli(sq, PESI_GOL, m).n, m });
+    const marcatore = scegli(sq, PESI_GOL, m);
+    let assist = null;
+    if (!marcatore.generico && rnd() < QUOTA_GOL_CON_ASSIST) {
+      const via = new Set(Object.keys(fuori).filter(n => fuori[n] <= valMin(m))); via.add(marcatore.n);
+      const a = pescaGiocatore(sq, PESI_ASSIST, via);
+      if (a && !a.generico && a.n !== marcatore.n) assist = a.n;
+    }
+    gol.push({ sq, n: marcatore.n, m, assist });
   };
   for (let i = 0; i < gh; i++) segna(casa, trasf);
   for (let i = 0; i < ga; i++) segna(trasf, casa);
@@ -219,7 +228,7 @@ function fraseOracolo(gh, ga, casa, trasf) {
 
 function testoCondivisione(p) {
   const r = [`🔮 L'Oracolo di ErCaciotta90 ha parlato:`, `${p.casa} ${p.gh}-${p.ga} ${p.trasf}`];
-  if (p.gol.length) r.push("⚽ " + p.gol.map(g => `${g.n}${g.extra ? " (" + g.extra + ")" : ""} ${g.m}'`).join(", "));
+  if (p.gol.length) r.push("⚽ " + p.gol.map(g => `${g.n}${g.extra ? " (" + g.extra + ")" : ""}${g.assist ? " (👟 " + g.assist + ")" : ""} ${g.m}'`).join(", "));
   const gialli = p.cartellini.filter(c => c.tipo === "giallo"), rossi = p.cartellini.filter(c => c.tipo !== "giallo");
   if (gialli.length) r.push("🟨 " + gialli.map(c => c.n).join(", "));
   if (rossi.length) r.push("🟥 " + rossi.map(c => `${c.n} ${c.m}'`).join(", "));
@@ -319,7 +328,7 @@ function mostraProfezia(p) {
   const sezione = (titolo, lista, fmt) => lista.length
     ? `<div class="sezione-ev"><div class="titolo-ev">${titolo}</div><div class="eventi">${colonna(p.casa, lista, fmt)}${colonna(p.trasf, lista, fmt)}</div></div>` : "";
   const ev = (m, ico, testo) => `<div class="ev"><span class="min">${m}'</span>${ico} ${testo}</div>`;
-  const fGol = g => ev(g.m, "⚽", esc(g.n) + (g.extra ? ` <span class="tag">${g.extra === "rig." ? "su rigore" : "autogol"}</span>` : ""));
+  const fGol = g => ev(g.m, "⚽", esc(g.n) + (g.assist ? ` <span class="assist">(👟 ${esc(g.assist)})</span>` : "") + (g.extra ? ` <span class="tag">${g.extra === "rig." ? "su rigore" : "autogol"}</span>` : ""));
   const icona = { giallo: "🟨", rosso: "🟥", rosso2: "🟨🟥" };
   const fCart = c => ev(c.m, icona[c.tipo], esc(c.n) + (c.tipo === "rosso" ? ` <span class="tag rosso">rosso diretto</span>` : c.tipo === "rosso2" ? ` <span class="tag rosso">espulso</span>` : ""));
   const fRig = x => x.esito === "parato"

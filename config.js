@@ -12,7 +12,7 @@ window.CONFIG = {
   // Classifica live (Supabase). Si riempie dopo aver creato il progetto:
   // url = "Project URL", chiave = "anon public" oppure "publishable" key.
   // La chiave e' pubblica per natura: puo' stare qui.
-  classifica: { url: "", chiave: "" },
+  classifica: { url: "https://ccesmmlpjpcdeamhrebs.supabase.co", chiave: "sb_publishable_Nm5W7mUvB9WZQvzlvAMpLA_5poPg2ws" },
 
   // Secondi a disposizione per ogni domanda
   secondiQuiz: 15,
