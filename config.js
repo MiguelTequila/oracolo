@@ -9,6 +9,11 @@ window.CONFIG = {
   // fino al via libera di commercialista e ufficio del personale.
   pro: { attiva: false },
 
+  // Classifica live (Supabase). Si riempie dopo aver creato il progetto:
+  // url = "Project URL", chiave = "anon public" oppure "publishable" key.
+  // La chiave e' pubblica per natura: puo' stare qui.
+  classifica: { url: "", chiave: "" },
+
   // Secondi a disposizione per ogni domanda
   secondiQuiz: 15,
   secondiLeggenda: 12,

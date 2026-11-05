@@ -25,8 +25,9 @@
 
 <nav class="schede" role="tablist">
   <button class="scheda attiva" data-vai="oracolo" role="tab">🔮 Oracolo</button>
-  <button class="scheda" data-vai="quiz" role="tab">🧠 Quiz del giorno</button>
-  <button class="scheda" data-vai="info" role="tab">ℹ️ Info</button>
+  <button class="scheda" data-vai="quiz" role="tab">🧠 Quiz</button>
+  <button class="scheda" data-vai="classifica" role="tab">🏆 Classifica</button>
+  <button class="scheda corta" data-vai="info" role="tab" aria-label="Info">ℹ️</button>
 </nav>
 
 <main>
@@ -66,6 +67,23 @@
     <div id="quiz-gioco" hidden></div>
   </section>
 
+  <!-- ================= CLASSIFICA ================= -->
+  <section id="vista-classifica" class="vista">
+    <div class="carta">
+      <div class="riga-giornata">
+        <button id="m-prec" class="freccia" aria-label="Mese precedente">‹</button>
+        <div id="m-titolo" class="g-titolo">Classifica</div>
+        <button id="m-succ" class="freccia" aria-label="Mese successivo">›</button>
+      </div>
+      <div class="interruttore" id="cl-filtro">
+        <button class="int attivo" data-filtro="tutti">Tutti</button>
+        <button class="int" data-filtro="lega" id="cl-lega-btn">La mia lega</button>
+      </div>
+      <div id="cl-corpo"></div>
+      <p class="piccolo">Contano i punti di tutti i quiz del giorno del mese. A parità: più risposte giuste, poi meno secondi. Per entrare in classifica scegli un nome prima di giocare.</p>
+    </div>
+  </section>
+
   <!-- ================= INFO ================= -->
   <section id="vista-info" class="vista">
     <div class="carta">
@@ -73,6 +91,7 @@
       <p><b>L'Oracolo</b> non tira a caso. Per ogni partita conosce i gol attesi di entrambe le squadre, calcolati da un modello statistico su gol fatti, subiti e forma. A ogni clic pesca un risultato da quella distribuzione: la favorita vince più spesso, ma le sorprese possono uscire. Proprio come nel calcio vero.</p>
       <p>Marcatori e ammonizioni escono dalla rosa vera: gli attaccanti segnano più spesso, difensori e mediani prendono più gialli.</p>
       <p><b>Il Quiz del giorno</b> ha 5 domande uguali per tutti, dalla facile alla "da veri malati", con 15 secondi l'una. Si gioca una volta al giorno: confronta il punteggio con la tua lega condividendo il risultato.</p>
+      <p><b>La Classifica</b> somma i punti dei quiz del giorno di ogni mese. Puoi vedere quella di tutti o solo quella della tua lega: basta inserire lo stesso codice lega (es. SERIEFORCO). Il nome scelto è pubblico: non usare nome e cognome veri.</p>
       <p><b>Modalità Leggenda</b>: 10 domande solo per esperti. Si sblocca dopo 3 quiz del giorno.</p>
       <h2>Installa l'app</h2>
       <p>Su Android apri il menu ⋮ di Chrome e tocca <i>Aggiungi a schermata Home</i>. Su iPhone tocca Condividi in Safari e poi <i>Aggiungi alla schermata Home</i>.</p>

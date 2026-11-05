@@ -104,3 +104,13 @@ main{max-width:640px;margin:0 auto;padding:8px 12px 24px}
 .tag{font-size:.7rem;background:var(--fondo2);color:var(--tenue);padding:1px 6px;border-radius:6px;margin-left:2px;white-space:nowrap}
 .tag.rosso{background:rgba(239,77,90,.2);color:#ff9aa2}
 .croce{color:#ff3b4a;font-weight:900;font-size:1rem}
+.scheda.corta{flex:0 0 52px}
+.tabella{width:100%;border-collapse:collapse;font-size:.9rem;margin:6px 0 10px}
+.tabella th{font-size:.7rem;color:var(--tenue);text-transform:uppercase;text-align:left;padding:6px 4px;font-weight:600}
+.tabella td{padding:9px 4px;border-top:1px solid rgba(169,139,255,.12)}
+.tabella td.n,.tabella th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tabella tr.io td{background:rgba(240,190,80,.12);font-weight:800}
+.tabella .lega{font-size:.7rem;color:var(--tenue);display:block;font-weight:400}
+.medaglia{font-size:1.1rem}
+.esito-cl{margin:10px 0 0;font-size:.85rem}
+.due-campi{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}

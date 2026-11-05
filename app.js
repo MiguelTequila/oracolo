@@ -251,8 +251,8 @@ function preparaOracolo() {
   sc.onchange = st.onchange = aggiornaBottone;
   $("#g-prec").onclick = () => { statoO.gIdx = Math.max(0, statoO.gIdx - 1); disegnaGiornata(); };
   $("#g-succ").onclick = () => { statoO.gIdx = Math.min(statoO.giornate.length - 1, statoO.gIdx + 1); disegnaGiornata(); };
-  document.querySelectorAll(".int").forEach(b => b.onclick = () => {
-    document.querySelectorAll(".int").forEach(x => x.classList.toggle("attivo", x === b));
+  document.querySelectorAll("#vista-oracolo .int").forEach(b => b.onclick = () => {
+    document.querySelectorAll("#vista-oracolo .int").forEach(x => x.classList.toggle("attivo", x === b));
     statoO.modo = b.dataset.modo;
     $("#pannello-giornata").hidden = statoO.modo !== "giornata";
     $("#pannello-libera").hidden = statoO.modo !== "libera";
@@ -392,8 +392,13 @@ function quizHome() {
         <p>Oggi: <b>${s.oggi.giuste}/5</b> · <b>${s.oggi.punti}</b> punti</p>
         <p class="piccolo">Prossimo quiz tra <span id="countdown"></span></p></div>
         <button class="bottone verde" style="width:100%" id="ricondividi">📲 Condividi il risultato</button>`
-      : `<label class="piccolo">Il tuo nome (compare nel risultato condiviso)
-           <input class="input" id="nick" maxlength="20" placeholder="es. ErCaciotta" value="${esc(s.nick || "")}"></label>
+      : `<div class="due-campi">
+           <label class="piccolo">Il tuo nome in classifica
+             <input class="input" id="nick" maxlength="20" placeholder="es. ErCaciotta" value="${esc(s.nick || "")}"></label>
+           <label class="piccolo">Codice lega (facoltativo)
+             <input class="input" id="lega" maxlength="20" placeholder="es. SERIEFORCO" value="${esc(s.lega || "")}"></label>
+         </div>
+         ${classificaAttiva() ? "" : `<p class="piccolo">La classifica online arriva a breve: per ora il nome compare nel risultato condiviso.</p>`}
          <button class="bottone-grande" id="gioca">Gioca il quiz di oggi</button>`}
     </div>
     <div class="carta ${sbloccata ? "" : "lucchetto"}">
@@ -404,7 +409,11 @@ function quizHome() {
         : `<p class="piccolo">Si sblocca dopo ${sblocco} quiz del giorno (${Math.min(s.giocati, sblocco)}/${sblocco}).</p>`}
     </div>`;
   const g = $("#gioca");
-  if (g) g.onclick = () => { s.nick = ($("#nick").value || "").trim(); mem.set("quiz", s); avviaQuiz("giorno"); };
+  if (g) g.onclick = () => {
+    s.nick = ($("#nick").value || "").trim().replace(/\s+/g, " "); s.lega = ($("#lega").value || "").trim().replace(/\s+/g, "").toUpperCase();
+    if (s.nick && (s.nick.length < 2)) { toast("Il nome deve avere almeno 2 caratteri"); return; }
+    mem.set("quiz", s); avviaQuiz("giorno");
+  };
   const l = $("#leggenda"); if (l) l.onclick = () => avviaQuiz("leggenda");
   const rc = $("#ricondividi"); if (rc) rc.onclick = () => condividi(testoQuiz(s.oggi, s.nick));
   if (giocatoOggi) avviaCountdown();
@@ -494,8 +503,10 @@ function fineQuiz() {
     <div class="grande">${Q.punti}</div><p>punti · ${giuste}/${Q.domande.length} giuste · ${Math.round(Q.tempoTot)}s</p>
     <p class="frase">${giudizio}</p>
     ${Q.modo === "giorno" ? `<button class="bottone verde" style="width:100%" id="cond-quiz">📲 Sfida la tua lega</button>` : `<button class="bottone oro" style="width:100%" id="riprova">🔁 Riprova</button>`}
+    <p id="esito-cl" class="esito-cl piccolo"></p>
     <button class="bottone" style="width:100%;margin-top:8px" id="torna">Torna al quiz</button></div>`;
   const c = $("#cond-quiz"); if (c) c.onclick = () => condividi(testoQuiz(ris, s.nick));
+  if (Q.modo === "giorno") inviaRisultato(ris, s);
   const rp = $("#riprova"); if (rp) rp.onclick = () => avviaQuiz("leggenda");
   $("#torna").onclick = quizHome;
 }
@@ -511,12 +522,84 @@ function controllaQuizInterrotto() {
   }
 }
 
+
+// ================================================================ CLASSIFICA
+function classificaAttiva() { const c = CFG.classifica || {}; return !!(c.url && c.chiave); }
+async function rpc(nome, corpo) {
+  const c = CFG.classifica, h = { "Content-Type": "application/json", apikey: c.chiave };
+  if (c.chiave.startsWith("eyJ")) h.Authorization = "Bearer " + c.chiave;
+  const r = await fetch(c.url.replace(/\/$/, "") + "/rest/v1/rpc/" + nome, { method: "POST", headers: h, body: JSON.stringify(corpo || {}) });
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  return r.json();
+}
+function idDispositivo() {
+  let id = mem.get("dispositivo", null);
+  if (!id) {
+    id = (crypto.randomUUID ? crypto.randomUUID() : "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === "x" ? r : (r & 3 | 8)).toString(16); }));
+    mem.set("dispositivo", id);
+  }
+  return id;
+}
+const MSG_CL = {
+  ok: "🏆 Risultato registrato in classifica!",
+  gia_giocato: "Il risultato di oggi era già in classifica.",
+  nome_occupato: "⚠️ Questo nome è già usato da un altro telefono: il risultato non è entrato in classifica. Scegline un altro domani.",
+  quiz_scaduto: "Il quiz è di ieri: non vale per la classifica.",
+  nome_non_valido: "⚠️ Nome non valido (2-20 caratteri).",
+  lega_non_valida: "⚠️ Codice lega non valido (2-20 caratteri).",
+  punteggio_non_valido: "⚠️ Punteggio non accettato.",
+};
+async function inviaRisultato(ris, s) {
+  const box = $("#esito-cl");
+  if (!classificaAttiva()) return;
+  if (!s.nick) { if (box) box.textContent = "Senza nome non entri in classifica: domani inseriscilo prima di giocare."; return; }
+  try {
+    const esito = await rpc("invia_risultato", { p_nick: s.nick, p_device: idDispositivo(), p_lega: s.lega || "", p_numero: ris.numero, p_giuste: ris.giuste, p_punti: ris.punti, p_secondi: ris.secondi });
+    if (box) box.textContent = MSG_CL[esito] || esito;
+  } catch (e) { if (box) box.textContent = "Classifica non raggiungibile in questo momento."; }
+}
+
+const CL = { mese: null, filtro: "tutti", turno: 0 };
+function meseCorrente() { return oggiRoma().slice(0, 7); }
+function spostaMese(m, d) { let [a, b] = m.split("-").map(Number); b += d; if (b < 1) { b = 12; a--; } if (b > 12) { b = 1; a++; } return `${a}-${String(b).padStart(2, "0")}`; }
+function nomeMese(m) { const [a, b] = m.split("-").map(Number); const t = new Date(Date.UTC(a, b - 1, 15)).toLocaleDateString("it-IT", { month: "long", year: "numeric", timeZone: "UTC" }); return t.charAt(0).toUpperCase() + t.slice(1); }
+
+async function mostraClassifica() {
+  if (!CL.mese) CL.mese = meseCorrente();
+  const s = statoQuiz(), corpo = $("#cl-corpo");
+  $("#m-titolo").textContent = "🏆 " + nomeMese(CL.mese);
+  $("#m-succ").disabled = CL.mese >= meseCorrente();
+  $("#m-prec").disabled = CL.mese <= "2026-11";
+  $("#cl-lega-btn").textContent = s.lega ? "Lega " + s.lega : "La mia lega";
+  document.querySelectorAll("#cl-filtro .int").forEach(b => b.classList.toggle("attivo", b.dataset.filtro === CL.filtro));
+  if (!classificaAttiva()) { corpo.innerHTML = `<p class="nessuno centro">La classifica online sta per arrivare. Intanto gioca il quiz: il nome che scegli sarà il tuo posto in classifica.</p>`; return; }
+  if (CL.filtro === "lega" && !s.lega) { corpo.innerHTML = `<p class="nessuno centro">Inserisci un codice lega nella scheda Quiz (lo stesso per tutti i tuoi amici) e qui vedrai solo la vostra classifica.</p>`; return; }
+  corpo.innerHTML = `<p class="attesa">Carico la classifica…</p>`;
+  const turno = ++CL.turno;
+  try {
+    const righe = await rpc("classifica", { p_mese: CL.mese, p_lega: CL.filtro === "lega" ? s.lega : null });
+    if (turno !== CL.turno) return; // e' arrivata una richiesta piu' recente
+    if (!righe.length) { corpo.innerHTML = `<p class="nessuno centro">Nessun risultato ancora. Il primo posto è libero: gioca il quiz di oggi!</p>`; return; }
+    const med = ["🥇", "🥈", "🥉"], io = (s.nick || "").toLowerCase();
+    corpo.innerHTML = `<table class="tabella"><thead><tr><th>#</th><th>Nome</th><th class="n">Quiz</th><th class="n">Punti</th></tr></thead><tbody>${
+      righe.map(r => `<tr class="${r.nome.toLowerCase() === io ? "io" : ""}"><td><span class="medaglia">${r.pos <= 3 ? med[r.pos - 1] : r.pos}</span></td>
+        <td>${esc(r.nome)}${r.lega && CL.filtro === "tutti" ? `<span class="lega">${esc(r.lega)}</span>` : ""}</td>
+        <td class="n">${r.giocati}</td><td class="n"><b>${r.punti}</b></td></tr>`).join("")}</tbody></table>`;
+  } catch (e) { corpo.innerHTML = `<p class="nessuno centro">Classifica non raggiungibile in questo momento. Riprova tra poco.</p>`; }
+}
+function preparaClassifica() {
+  $("#m-prec").onclick = () => { CL.mese = spostaMese(CL.mese, -1); mostraClassifica(); };
+  $("#m-succ").onclick = () => { CL.mese = spostaMese(CL.mese, 1); mostraClassifica(); };
+  document.querySelectorAll("#cl-filtro .int").forEach(b => b.onclick = () => { CL.filtro = b.dataset.filtro; mostraClassifica(); });
+}
+
 // ================================================================ AVVIO
 function schede() {
   document.querySelectorAll(".scheda").forEach(b => b.onclick = () => {
     document.querySelectorAll(".scheda").forEach(x => x.classList.toggle("attiva", x === b));
     document.querySelectorAll(".vista").forEach(v => v.classList.toggle("attiva", v.id === "vista-" + b.dataset.vai));
     if (b.dataset.vai === "quiz" && $("#quiz-gioco").hidden) quizHome();
+    if (b.dataset.vai === "classifica") mostraClassifica();
     window.scrollTo({ top: 0 });
   });
 }
@@ -528,7 +611,7 @@ function pubblicita() {
 }
 
 async function avvia() {
-  schede(); pubblicita(); controllaQuizInterrotto();
+  schede(); pubblicita(); controllaQuizInterrotto(); preparaClassifica();
   try {
     const [pa, ro, me, ind, rig] = await Promise.all([carica("data/partite.json"), carica("data/rose.json").catch(() => ({})), carica("data/meta.json").catch(() => ({})),
       carica("data/indisponibili.json").catch(() => ({})), carica("data/rigoristi.json").catch(() => ({}))]);
