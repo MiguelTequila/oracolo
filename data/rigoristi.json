@@ -1,4 +1,105 @@
 {
  "nota": "Per ogni squadra i rigoristi in ordine: tira il primo disponibile. Nomi come nel listone.",
- "rigoristi": {}
+ "rigoristi": {
+  "Atalanta": [
+   "Kessiè",
+   "Scamacca",
+   "Samardzic"
+  ],
+  "Bologna": [
+   "Orsolini",
+   "Dovbyk",
+   "Bernardeschi"
+  ],
+  "Cagliari": [
+   "Maldini",
+   "Fazzini",
+   "Deiola"
+  ],
+  "Como": [
+   "Da Cunha",
+   "Kean",
+   "Douvikas"
+  ],
+  "Fiorentina": [
+   "Mastantuono",
+   "Pellegrino M.",
+   "Goncalves P."
+  ],
+  "Frosinone": [
+   "Schmid",
+   "Calò",
+   "Bobcek"
+  ],
+  "Genoa": [
+   "Colombo",
+   "Ostigard",
+   "Vitinha O."
+  ],
+  "Inter": [
+   "Calhanoglu",
+   "Zielinski",
+   "Martinez L."
+  ],
+  "Juventus": [
+   "Kolo Muani",
+   "Woltemade",
+   "Locatelli"
+  ],
+  "Lazio": [
+   "Zaccagni",
+   "Taylor K.",
+   "Pinamonti"
+  ],
+  "Lecce": [
+   "Geubbels",
+   "Stulic",
+   "Pierotti"
+  ],
+  "Milan": [
+   "Ramos G.",
+   "Pulisic",
+   "Modric"
+  ],
+  "Monza": [
+   "Pessina",
+   "Cutrone"
+  ],
+  "Napoli": [
+   "De Bruyne",
+   "Hojlund",
+   "Politano"
+  ],
+  "Parma": [
+   "Bernabè",
+   "Valeri",
+   "Sierro"
+  ],
+  "Roma": [
+   "Malen",
+   "Dybala",
+   "Soulè"
+  ],
+  "Sassuolo": [
+   "Berardi",
+   "Esposito Se.",
+   "Laurientè"
+  ],
+  "Torino": [
+   "Vlasic",
+   "Kulenovic",
+   "Zapata D."
+  ],
+  "Udinese": [
+   "Davis K.",
+   "Zaniolo",
+   "Ekkelenkamp"
+  ],
+  "Venezia": [
+   "Busio",
+   "Adams A.",
+   "Yeboah J."
+  ]
+ },
+ "aggiornato": "2026-11-05"
 }
