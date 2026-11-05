@@ -5,7 +5,7 @@ Sito gratuito di intrattenimento: l'Oracolo "svela" risultato, marcatori e ammon
 ## Come funziona
 
 - **Partite e gol attesi** arrivano dal `simulatore-calcio-pro`, letti dal suo file pubblico `data/fixtures_processed.json`. A ogni clic l'Oracolo pesca un risultato dalla distribuzione di Poisson (con correzione Dixon-Coles) di quella partita. La favorita vince più spesso, ma le sorprese escono.
-- **Rose**: le scarica il workflow una volta a settimana da Wikipedia (oppure da Football-Data.org, se nel repo aggiungi il secret `FDKEY`). Se una squadra esce con meno di 15 giocatori, si tiene la rosa precedente.
+- **Rose**: oggi vengono tutte da `data/rose_manuali.json`, creato dal listone 2026/27 (ceduti esclusi), che vince sempre su quelle scaricate. Ogni giocatore ha un peso `p` da 1 (riserva) a 5 (big): chi vale di più segna di più. **Dopo il mercato di gennaio va rifatto con il listone nuovo.** Come riserva, lo script le scarica il workflow una volta a settimana da Wikipedia (oppure da Football-Data.org, se nel repo aggiungi il secret `FDKEY`). Se una squadra esce con meno di 15 giocatori, si tiene la rosa precedente.
 - **Marcatori**: pesati per ruolo (attaccanti 6, centrocampisti 2,4, difensori 0,7). **Gialli**: in media 4,3 a partita, più spesso a difensori e mediani. Il secondo giallo diventa rosso.
 - **Quiz del giorno**: 5 domande uguali per tutti (una per livello), 15 secondi l'una, una sola partita al giorno. Il risultato si condivide a quadratini, stile Wordle. La **modalità Leggenda** si sblocca dopo 3 quiz.
 

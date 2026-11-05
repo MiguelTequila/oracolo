@@ -95,7 +95,9 @@ function pescaGiocatore(sq, pesi, esclusi) {
   const rosa = rosaDi(sq);
   if (!rosa) { const r = pesca(Object.keys(pesi), Object.values(pesi)); return { n: REPARTO[r], r, generico: true }; }
   const cand = rosa.filter(g => !esclusi || !esclusi.has(g.n));
-  return pesca(cand, cand.map(g => pesi[g.r] || 0.5));
+  // p = peso giocatore 1 (riserva) ... 5 (big): chi gioca e vale di piu' segna di piu'
+  const fattore = pesi === PESI_GOL ? (g => Math.pow(g.p || 2, 1.6)) : (g => 0.4 + 0.3 * (g.p || 2));
+  return pesca(cand, cand.map(g => (pesi[g.r] || 0.5) * fattore(g)));
 }
 function minuto(tardi) {
   let m = tardi ? Math.max(3, Math.round(90 * Math.sqrt(rnd()))) : 1 + Math.floor(rnd() * 90);
@@ -161,11 +163,11 @@ function fraseOracolo(gh, ga, casa, trasf) {
 
 function testoCondivisione(p) {
   const r = [`🔮 L'Oracolo ha parlato:`, `${p.casa} ${p.gh}-${p.ga} ${p.trasf}`];
-  if (p.gol.length) r.push("⚽ " + p.gol.map(g => `${g.n.split(" ").slice(-1)[0]} ${g.m}'`).join(", "));
+  if (p.gol.length) r.push("⚽ " + p.gol.map(g => `${g.n} ${g.m}'`).join(", "));
   const rossi = p.cartellini.filter(c => c.tipo !== "giallo");
   const gialli = p.cartellini.filter(c => c.tipo === "giallo");
-  if (gialli.length) r.push("🟨 " + gialli.map(c => c.n.split(" ").slice(-1)[0]).join(", "));
-  if (rossi.length) r.push("🟥 " + rossi.map(c => c.n.split(" ").slice(-1)[0]).join(", "));
+  if (gialli.length) r.push("🟨 " + gialli.map(c => c.n).join(", "));
+  if (rossi.length) r.push("🟥 " + rossi.map(c => c.n).join(", "));
   r.push(`"${p.frase}"`, "", "Interroga anche tu l'Oracolo: " + urlSito());
   return r.join("\n");
 }

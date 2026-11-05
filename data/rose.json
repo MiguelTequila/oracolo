@@ -1,1487 +1,2740 @@
 {
- "aggiornato": "2026-11-05T11:06:04.713822+00:00",
- "fonte": "Wikipedia",
+ "aggiornato": "2026-11-05T11:44:22.030642+00:00",
+ "fonte": "manuale",
  "rose": {
-  "Inter": [
-   {
-    "n": "Josep Martínez",
-    "r": "P"
-   },
-   {
-    "n": "Aleksandar Stanković",
-    "r": "C"
-   },
-   {
-    "n": "John Stones",
-    "r": "D"
-   },
-   {
-    "n": "Piotr Zieliński",
-    "r": "C"
-   },
-   {
-    "n": "Petar Sučić",
-    "r": "C"
-   },
-   {
-    "n": "Marcus Thuram",
-    "r": "A"
-   },
-   {
-    "n": "Lautaro Martínez",
-    "r": "A"
-   },
-   {
-    "n": "Luis Henrique",
-    "r": "C"
-   },
-   {
-    "n": "Raffaele Di Gennaro",
-    "r": "P"
-   },
-   {
-    "n": "Ange-Yoan Bonny",
-    "r": "A"
-   },
-   {
-    "n": "Andy Diouf",
-    "r": "C"
-   },
-   {
-    "n": "Hakan Çalhanoğlu",
-    "r": "C"
-   },
-   {
-    "n": "Curtis Jones",
-    "r": "C"
-   },
-   {
-    "n": "Henrikh Mkhitaryan",
-    "r": "C"
-   },
-   {
-    "n": "Nicolò Barella",
-    "r": "C"
-   },
-   {
-    "n": "Manuel Akanji",
-    "r": "D"
-   },
-   {
-    "n": "Benjamin Pavard",
-    "r": "D"
-   },
-   {
-    "n": "Carlos Augusto",
-    "r": "D"
-   },
-   {
-    "n": "Yann Bisseck",
-    "r": "D"
-   },
-   {
-    "n": "Federico Dimarco",
-    "r": "D"
-   },
-   {
-    "n": "Ivan Provedel",
-    "r": "P"
-   },
-   {
-    "n": "Pio Esposito",
-    "r": "A"
-   },
-   {
-    "n": "Alessandro Bastoni",
-    "r": "D"
-   },
-   {
-    "n": "Djed Spence",
-    "r": "D"
-   }
-  ],
-  "Milan": [
-   {
-    "n": "Pietro Terracciano",
-    "r": "P"
-   },
-   {
-    "n": "Pervis Estupiñán",
-    "r": "D"
-   },
-   {
-    "n": "Koni De Winter",
-    "r": "D"
-   },
-   {
-    "n": "Ruben Loftus-Cheek",
-    "r": "C"
-   },
-   {
-    "n": "Gonçalo Ramos",
-    "r": "A"
-   },
-   {
-    "n": "Christian Pulisic",
-    "r": "C"
-   },
-   {
-    "n": "Adrien Rabiot",
-    "r": "C"
-   },
-   {
-    "n": "Sankhoun Diawara",
-    "r": "D"
-   },
-   {
-    "n": "Luka Modrić",
-    "r": "C"
-   },
-   {
-    "n": "Mike Maignan",
-    "r": "P"
-   },
-   {
-    "n": "Omari Hutchinson",
-    "r": "C"
-   },
-   {
-    "n": "Samuel Chukwueze",
-    "r": "C"
-   },
-   {
-    "n": "Diego Moreira",
-    "r": "A"
-   },
-   {
-    "n": "Fikayo Tomori",
-    "r": "D"
-   },
-   {
-    "n": "Christian Comotto",
-    "r": "C"
-   },
-   {
-    "n": "Ardon Jashari",
-    "r": "C"
-   },
-   {
-    "n": "Strahinja Pavlović",
-    "r": "D"
-   },
-   {
-    "n": "Davide Bartesaghi",
-    "r": "D"
-   },
-   {
-    "n": "Mario Gila",
-    "r": "D"
-   },
-   {
-    "n": "Valeri Vladimirov",
-    "r": "D"
-   },
-   {
-    "n": "Filippo Terracciano",
-    "r": "D"
-   },
-   {
-    "n": "Matteo Gabbia",
-    "r": "D"
-   },
-   {
-    "n": "Alexis Saelemaekers",
-    "r": "C"
-   },
-   {
-    "n": "Alphadjo Cisse",
-    "r": "C"
-   },
-   {
-    "n": "Francesco Camarda",
-    "r": "A"
-   },
-   {
-    "n": "Yunus Musah",
-    "r": "C"
-   },
-   {
-    "n": "Lorenzo Torriani",
-    "r": "P"
-   }
-  ],
-  "Juventus": [
-   {
-    "n": "Kamil Grabara",
-    "r": "P"
-   },
-   {
-    "n": "Zeki Çelik",
-    "r": "D"
-   },
-   {
-    "n": "Bremer",
-    "r": "D"
-   },
-   {
-    "n": "Federico Gatti",
-    "r": "D"
-   },
-   {
-    "n": "Manuel Locatelli",
-    "r": "C"
-   },
-   {
-    "n": "Lloyd Kelly",
-    "r": "D"
-   },
-   {
-    "n": "Francisco Conceição",
-    "r": "A"
-   },
-   {
-    "n": "Teun Koopmeiners",
-    "r": "C"
-   },
-   {
-    "n": "Randal Kolo Muani",
-    "r": "A"
-   },
-   {
-    "n": "Kenan Yıldız",
-    "r": "A"
-   },
-   {
-    "n": "Edon Zhegrova",
-    "r": "A"
-   },
-   {
-    "n": "Douglas Luiz",
-    "r": "C"
-   },
-   {
-    "n": "Jérémie Boga",
-    "r": "A"
-   },
-   {
-    "n": "Arkadiusz Milik",
-    "r": "A"
-   },
-   {
-    "n": "Pierre Kalulu",
-    "r": "D"
-   },
-   {
-    "n": "Kerim Alajbegović",
-    "r": "C"
-   },
-   {
-    "n": "Jeff Ekhator",
-    "r": "A"
-   },
-   {
-    "n": "Khéphren Thuram",
-    "r": "C"
-   },
-   {
-    "n": "Andrea Cambiaso",
-    "r": "D"
-   },
-   {
-    "n": "Weston McKennie",
-    "r": "C"
-   },
-   {
-    "n": "Carlo Pinsoglio",
-    "r": "P"
-   },
-   {
-    "n": "Daniele Rugani",
-    "r": "D"
-   },
-   {
-    "n": "Guglielmo Vicario",
-    "r": "P"
-   },
-   {
-    "n": "Jhon Lucumí",
-    "r": "D"
-   },
-   {
-    "n": "Nick Woltemade",
-    "r": "A"
-   },
-   {
-    "n": "Pape Matar Sarr",
-    "r": "C"
-   },
-   {
-    "n": "Nico González",
-    "r": "A"
-   },
-   {
-    "n": "Juan Cabal",
-    "r": "D"
-   },
-   {
-    "n": "Neto",
-    "r": "P"
-   }
-  ],
-  "Napoli": [
-   {
-    "n": "Alex Meret",
-    "r": "P"
-   },
-   {
-    "n": "Costantino Favasuli",
-    "r": "D"
-   },
-   {
-    "n": "Alessandro Buongiorno",
-    "r": "D"
-   },
-   {
-    "n": "Benoît Badiashile",
-    "r": "D"
-   },
-   {
-    "n": "Billy Gilmour",
-    "r": "C"
-   },
-   {
-    "n": "David Neres",
-    "r": "A"
-   },
-   {
-    "n": "Scott McTominay",
-    "r": "C"
-   },
-   {
-    "n": "Kevin De Bruyne",
-    "r": "C"
-   },
-   {
-    "n": "Claudio Pugliese",
-    "r": "P"
-   },
-   {
-    "n": "Amir Rrahmani",
-    "r": "D"
-   },
-   {
-    "n": "Nikita Contini",
-    "r": "P"
-   },
-   {
-    "n": "Rafa Marín",
-    "r": "D"
-   },
-   {
-    "n": "Mathías Olivera",
-    "r": "D"
-   },
-   {
-    "n": "Rasmus Højlund",
-    "r": "A"
-   },
-   {
-    "n": "Lorenzo Lucca",
-    "r": "A"
-   },
-   {
-    "n": "Matteo Politano",
-    "r": "A"
-   },
-   {
-    "n": "Giovanni Di Lorenzo",
-    "r": "D"
-   },
-   {
-    "n": "Giovane",
-    "r": "A"
-   },
-   {
-    "n": "Antonio Vergara",
-    "r": "C"
-   },
-   {
-    "n": "Alisson Santos",
-    "r": "A"
-   },
-   {
-    "n": "Sam Beukema",
-    "r": "D"
-   },
-   {
-    "n": "Vanja Milinković-Savić",
-    "r": "P"
-   },
-   {
-    "n": "Luca Marianucci",
-    "r": "D"
-   },
-   {
-    "n": "Leonardo Spinazzola",
-    "r": "D"
-   },
-   {
-    "n": "Stanislav Lobotka",
-    "r": "C"
-   },
-   {
-    "n": "Noa Lang",
-    "r": "A"
-   },
-   {
-    "n": "Frank Anguissa",
-    "r": "C"
-   }
-  ],
-  "Roma": [
-   {
-    "n": "Devyne Rensch",
-    "r": "D"
-   },
-   {
-    "n": "Konstantinos Koulierakis",
-    "r": "D"
-   },
-   {
-    "n": "Bryan Cristante",
-    "r": "C"
-   },
-   {
-    "n": "Evan Ndicka",
-    "r": "D"
-   },
-   {
-    "n": "Lorenzo Pellegrini",
-    "r": "C"
-   },
-   {
-    "n": "Santiago Castro",
-    "r": "A"
-   },
-   {
-    "n": "Donyell Malen",
-    "r": "A"
-   },
-   {
-    "n": "Marten de Roon",
-    "r": "C"
-   },
-   {
-    "n": "Manu Koné",
-    "r": "C"
-   },
-   {
-    "n": "Matías Soulé",
-    "r": "A"
-   },
-   {
-    "n": "Nahuel Molina",
-    "r": "D"
-   },
-   {
-    "n": "Paulo Dybala",
-    "r": "A"
-   },
-   {
-    "n": "Mario Hermoso",
-    "r": "D"
-   },
-   {
-    "n": "Gianluca Mancini",
-    "r": "D"
-   },
-   {
-    "n": "Leonardo Balerdi",
-    "r": "D"
-   },
-   {
-    "n": "Devis Vásquez",
-    "r": "P"
-   },
-   {
-    "n": "Wesley",
-    "r": "D"
-   },
-   {
-    "n": "Niccolò Pisilli",
-    "r": "C"
-   },
-   {
-    "n": "Antonio Arena",
-    "r": "A"
-   },
-   {
-    "n": "Giorgio De Marzi",
-    "r": "P"
-   },
-   {
-    "n": "Emanuele Lulli",
-    "r": "D"
-   },
-   {
-    "n": "Rodrigo Mora",
-    "r": "C"
-   },
-   {
-    "n": "Daniele Ghilardi",
-    "r": "D"
-   },
-   {
-    "n": "Pierluigi Gollini",
-    "r": "P"
-   },
-   {
-    "n": "Mile Svilar",
-    "r": "P"
-   }
-  ],
-  "Lazio": [
-   {
-    "n": "Diogo Leite",
-    "r": "D"
-   },
-   {
-    "n": "Luca Pellegrini",
-    "r": "D"
-   },
-   {
-    "n": "Danilho Doekhi",
-    "r": "D"
-   },
-   {
-    "n": "Nicolò Rovella",
-    "r": "C"
-   },
-   {
-    "n": "Fisayo Dele-Bashiru",
-    "r": "C"
-   },
-   {
-    "n": "Bruno Galassi",
-    "r": "C"
-   },
-   {
-    "n": "Andrea Pinamonti",
-    "r": "A"
-   },
-   {
-    "n": "Mattia Zaccagni",
-    "r": "C"
-   },
-   {
-    "n": "Gustav Isaksen",
-    "r": "A"
-   },
-   {
-    "n": "Tijjani Noslin",
-    "r": "A"
-   },
-   {
-    "n": "Romano Floriani Mussolini",
-    "r": "D"
-   },
-   {
-    "n": "Davide Frattesi",
-    "r": "C"
-   },
-   {
-    "n": "Nuno Tavares",
-    "r": "D"
-   },
-   {
-    "n": "Reda Belahyane",
-    "r": "C"
-   },
-   {
-    "n": "Matteo Cancellieri",
-    "r": "A"
-   },
-   {
-    "n": "Alfonso Pedraza",
-    "r": "D"
-   },
-   {
-    "n": "Kenneth Taylor",
-    "r": "C"
-   },
-   {
-    "n": "Oliver Provstgaard",
-    "r": "D"
-   },
-   {
-    "n": "Adrian Przyborek",
-    "r": "C"
-   },
-   {
-    "n": "Manuel Lazzari",
-    "r": "C"
-   },
-   {
-    "n": "Danilo Cataldi",
-    "r": "C"
-   },
-   {
-    "n": "Christos Mandas",
-    "r": "P"
-   },
-   {
-    "n": "Josip Šutalo",
-    "r": "D"
-   },
-   {
-    "n": "Edoardo Motta",
-    "r": "P"
-   },
-   {
-    "n": "Alessio Furlanetto",
-    "r": "P"
-   },
-   {
-    "n": "Davide Renzetti",
-    "r": "P"
-   },
-   {
-    "n": "Federico Serra",
-    "r": "A"
-   },
-   {
-    "n": "Valerio Farcomeni",
-    "r": "C"
-   },
-   {
-    "n": "Filipe Bordon",
-    "r": "D"
-   },
-   {
-    "n": "Adam Marušić",
-    "r": "D"
-   },
-   {
-    "n": "Albert Guðmundsson",
-    "r": "A"
-   }
-  ],
   "Atalanta": [
    {
-    "n": "Odilon Kossounou",
-    "r": "D"
+    "n": "Carnesecchi",
+    "r": "P",
+    "p": 3
    },
    {
-    "n": "Isak Hien",
-    "r": "D"
+    "n": "Sportiello",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Kamaldeen Sulemana",
-    "r": "A"
+    "n": "Pompei",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Mario Pašalić",
-    "r": "C"
+    "n": "Scalvini",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Gianluca Scamacca",
-    "r": "A"
+    "n": "Bellanova",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Lazar Samardžić",
-    "r": "C"
+    "n": "Kolasinac",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Jonathan Rowe",
-    "r": "A"
+    "n": "Zappacosta",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Éderson",
-    "r": "C"
+    "n": "Hien",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Raoul Bellanova",
-    "r": "D"
+    "n": "Bernasconi",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Charles De Ketelaere",
-    "r": "C"
+    "n": "Kristensen T.",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Giacomo Raspadori",
-    "r": "A"
+    "n": "Kossounou",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Franck Kessié",
-    "r": "C"
+    "n": "Obric",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Thomas Pompei",
-    "r": "P"
+    "n": "Samardzic",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Sead Kolašinac",
-    "r": "D"
+    "n": "Zalewski",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Marco Carnesecchi",
-    "r": "P"
+    "n": "Ederson D.S.",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Thomas Kristensen",
-    "r": "D"
+    "n": "Kessiè",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Relja Obrić",
-    "r": "D"
+    "n": "Gaetano",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Giorgio Scalvini",
-    "r": "D"
+    "n": "Elmas",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Lorenzo Bernasconi",
-    "r": "D"
+    "n": "Rowe",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Marco Sportiello",
-    "r": "P"
+    "n": "Pasalic",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Nicola Zalewski",
-    "r": "C"
+    "n": "Krstovic",
+    "r": "A",
+    "p": 5
    },
    {
-    "n": "Gianluca Gaetano",
-    "r": "C"
+    "n": "De Ketelaere",
+    "r": "A",
+    "p": 4
    },
    {
-    "n": "Davide Zappacosta",
-    "r": "D"
+    "n": "Scamacca",
+    "r": "A",
+    "p": 4
    },
    {
-    "n": "Nikola Krstović",
-    "r": "A"
+    "n": "Raspadori",
+    "r": "A",
+    "p": 3
    },
    {
-    "n": "Eljif Elmas",
-    "r": "C"
+    "n": "Sulemana K.",
+    "r": "A",
+    "p": 1
    }
   ],
   "Bologna": [
    {
-    "n": "Łukasz Skorupski",
-    "r": "P"
+    "n": "Skorupski",
+    "r": "P",
+    "p": 3
    },
    {
-    "n": "Emil Holm",
-    "r": "D"
+    "n": "Pessina Mas.",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Arthur Theate",
-    "r": "D"
+    "n": "Happonen",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Tommaso Pobega",
-    "r": "C"
+    "n": "Miranda J.",
+    "r": "D",
+    "p": 4
    },
    {
-    "n": "Eivind Helland",
-    "r": "D"
+    "n": "Casale",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Nikola Moro",
-    "r": "C"
+    "n": "Zortea",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Riccardo Orsolini",
-    "r": "A"
+    "n": "Theate",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Mikel Amondarain",
-    "r": "C"
+    "n": "Helland",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Artem Dovbyk",
-    "r": "A"
+    "n": "Holm",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Federico Bernardeschi",
-    "r": "C"
+    "n": "Darmian",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Samuel Mbangula",
-    "r": "A"
+    "n": "Heggem",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Torbjørn Heggem",
-    "r": "D"
+    "n": "Vitik",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Nicolò Casale",
-    "r": "D"
+    "n": "De Silvestri",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Oussama El Azzouzi",
-    "r": "C"
+    "n": "Alhassane",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Marco Libra",
-    "r": "C"
+    "n": "Orsolini",
+    "r": "C",
+    "p": 4
    },
    {
-    "n": "Lewis Ferguson",
-    "r": "C"
+    "n": "Bernardeschi",
+    "r": "C",
+    "p": 4
    },
    {
-    "n": "Nadir Zortea",
-    "r": "D"
+    "n": "Pobega",
+    "r": "C",
+    "p": 4
    },
    {
-    "n": "Jens Odgaard",
-    "r": "C"
+    "n": "Cambiaghi",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Jay Enem",
-    "r": "A"
+    "n": "Mbangula",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Rahim Alhassane",
-    "r": "D"
+    "n": "Ferguson",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Massimo Pessina",
-    "r": "P"
+    "n": "Odgaard",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Nicolò Cambiaghi",
-    "r": "A"
+    "n": "Moro N.",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Lorenzo De Silvestri",
-    "r": "D"
+    "n": "Amondarain",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Juan Miranda",
-    "r": "D"
+    "n": "El Azzouzi O.",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Matteo Darmian",
-    "r": "D"
+    "n": "Libra",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Martin Vitík",
-    "r": "D"
+    "n": "Dovbyk",
+    "r": "A",
+    "p": 3
    },
    {
-    "n": "Ukko Happonen",
-    "r": "P"
+    "n": "Piccoli",
+    "r": "A",
+    "p": 3
    },
    {
-    "n": "Roberto Piccoli",
-    "r": "A"
+    "n": "Enem",
+    "r": "A",
+    "p": 1
+   }
+  ],
+  "Cagliari": [
+   {
+    "n": "Caprile",
+    "r": "P",
+    "p": 3
+   },
+   {
+    "n": "Sherri",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Radunovic",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Mina",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Zè Pedro",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Rodriguez Ju.",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Obert",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Sugawara",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Kofler",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Idrissi R.",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Aurelio",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Romano",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Adopo",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Winks",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Fadera",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Fazzini",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Deiola",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Felici",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Massolin",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Liteta",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Ciervo",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Gagliardini",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Maldini",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Mendy P.",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Nzola",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Kevin Carlos",
+    "r": "A",
+    "p": 2
+   },
+   {
+    "n": "Trepy",
+    "r": "A",
+    "p": 1
+   }
+  ],
+  "Como": [
+   {
+    "n": "Butez",
+    "r": "P",
+    "p": 4
+   },
+   {
+    "n": "Sanchez Ro.",
+    "r": "P",
+    "p": 3
+   },
+   {
+    "n": "Vigorito",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Ramon",
+    "r": "D",
+    "p": 4
+   },
+   {
+    "n": "Kaiki",
+    "r": "D",
+    "p": 4
+   },
+   {
+    "n": "Couto",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Kempf",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Valle",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Chalobah T.",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Smolcic I.",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Kambwala",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Goldaniga",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Paz N.",
+    "r": "C",
+    "p": 5
+   },
+   {
+    "n": "Baturina",
+    "r": "C",
+    "p": 5
+   },
+   {
+    "n": "Da Cunha",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Caqueret",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Perrone",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Milla",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Liberali",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Rodriguez Je.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Addai",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Ricci S.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Lahdo",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Douvikas",
+    "r": "A",
+    "p": 5
+   },
+   {
+    "n": "Kean",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Diao",
+    "r": "A",
+    "p": 3
    }
   ],
   "Fiorentina": [
    {
-    "n": "Dodô",
-    "r": "D"
+    "n": "De Gea",
+    "r": "P",
+    "p": 2
    },
    {
-    "n": "Radu Drăgușin",
-    "r": "D"
+    "n": "Christensen O.",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Marco Brescianini",
-    "r": "C"
+    "n": "Lezzerini",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Marin Pongračić",
-    "r": "D"
+    "n": "Jimenez A.",
+    "r": "D",
+    "p": 4
    },
    {
-    "n": "Luca Ranieri",
-    "r": "D"
+    "n": "Dragusin",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Arthur Atta",
-    "r": "C"
+    "n": "Pongracic",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "João Mário",
-    "r": "D"
+    "n": "Joao Mario",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Luca Lezzerini",
-    "r": "P"
+    "n": "Valdepenas",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Álex Jiménez",
-    "r": "D"
-   },
-   {
-    "n": "Víctor Valdepeñas",
-    "r": "D"
-   },
-   {
-    "n": "Beto",
-    "r": "A"
-   },
-   {
-    "n": "Alieu Njie",
-    "r": "A"
-   },
-   {
-    "n": "Cher Ndour",
-    "r": "C"
-   },
-   {
-    "n": "Pedro Gonçalves",
-    "r": "A"
-   },
-   {
-    "n": "Wilfried Gnonto",
-    "r": "A"
-   },
-   {
-    "n": "Franco Mastantuono",
-    "r": "A"
-   },
-   {
-    "n": "Mateo Pellegrino",
-    "r": "A"
+    "n": "Dodò",
+    "r": "D",
+    "p": 2
    },
    {
     "n": "Viery",
-    "r": "D"
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Christ Inao Oulaï",
-    "r": "C"
+    "n": "Ranieri L.",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "David de Gea",
-    "r": "P"
+    "n": "Parisi",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Nicolò Fagioli",
-    "r": "C"
+    "n": "Mastantuono",
+    "r": "C",
+    "p": 4
    },
    {
-    "n": "Oliver Christensen",
-    "r": "P"
+    "n": "Njie",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Fabiano Parisi",
-    "r": "D"
-   }
-  ],
-  "Torino": [
-   {
-    "n": "Nathan Patterson",
-    "r": "D"
+    "n": "Atta",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Cristiano Biraghi",
-    "r": "D"
+    "n": "Goncalves P.",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Eray Cömert",
-    "r": "D"
+    "n": "Fagioli",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Emirhan İlkhan",
-    "r": "C"
+    "n": "Ndour",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Zakaria Aboukhlal",
-    "r": "A"
+    "n": "Oulai",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Rolando Mandragora",
-    "r": "C"
+    "n": "Brescianini",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Pietro Pellegri",
-    "r": "A"
+    "n": "Pellegrino M.",
+    "r": "A",
+    "p": 4
    },
    {
-    "n": "Nikola Vlašić",
-    "r": "C"
+    "n": "Beto",
+    "r": "A",
+    "p": 3
    },
    {
-    "n": "Gaetano Oristanio",
-    "r": "A"
-   },
-   {
-    "n": "Ricardo Rodriguez",
-    "r": "D"
-   },
-   {
-    "n": "Pietro Comuzzo",
-    "r": "D"
-   },
-   {
-    "n": "Sandro Kulenović",
-    "r": "A"
-   },
-   {
-    "n": "Giovanni Simeone",
-    "r": "A"
-   },
-   {
-    "n": "Ché Adams",
-    "r": "A"
-   },
-   {
-    "n": "Lucas Perri",
-    "r": "P"
-   },
-   {
-    "n": "Daniel Bragança",
-    "r": "C"
-   },
-   {
-    "n": "Cesare Casadei",
-    "r": "C"
-   },
-   {
-    "n": "Saúl Coco",
-    "r": "D"
-   },
-   {
-    "n": "Diego Mascardi",
-    "r": "P"
-   },
-   {
-    "n": "Kian Fitz-Jim",
-    "r": "C"
-   },
-   {
-    "n": "Niccolò Fortini",
-    "r": "D"
-   },
-   {
-    "n": "Ardian Ismajli",
-    "r": "D"
-   },
-   {
-    "n": "Rafik Belghali",
-    "r": "D"
-   },
-   {
-    "n": "Gvidas Gineitis",
-    "r": "C"
-   },
-   {
-    "n": "Lapo Siviero",
-    "r": "P"
-   },
-   {
-    "n": "Alessio Cacciamani",
-    "r": "C"
-   },
-   {
-    "n": "Andrea Luongo",
-    "r": "C"
-   },
-   {
-    "n": "Franco Israel",
-    "r": "P"
-   },
-   {
-    "n": "Duván Zapata",
-    "r": "A"
+    "n": "Gnonto",
+    "r": "A",
+    "p": 2
    }
   ],
   "Frosinone": [
    {
-    "n": "Giorgio Cittadini",
-    "r": "D"
+    "n": "Palmisani",
+    "r": "P",
+    "p": 3
    },
    {
-    "n": "Gabriele Calvani",
-    "r": "D"
+    "n": "Desplanches",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Ben Lhassine Kone",
-    "r": "C"
+    "n": "Lolic",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Wisdom Amey",
-    "r": "D"
+    "n": "Pisseri",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Farès Ghedjemis",
-    "r": "A"
+    "n": "Bracaglia",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Antonio Raimondo",
-    "r": "A"
+    "n": "Oyono A.",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Romano Schmid",
-    "r": "C"
+    "n": "Calvani",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Daniel Bîrligea",
-    "r": "A"
+    "n": "Monterisi",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Matteo Pisseri",
-    "r": "P"
+    "n": "Terzic",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Giacomo Calò",
-    "r": "C"
+    "n": "Amey",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Matteo Cichella",
-    "r": "C"
+    "n": "Cittadini",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Giorgi Kvernadze",
-    "r": "A"
+    "n": "Tchato",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Anthony Oyono",
-    "r": "D"
-   },
-   {
-    "n": "Lorenzo Palmisani",
-    "r": "P"
-   },
-   {
-    "n": "Alessio Zerbin",
-    "r": "A"
-   },
-   {
-    "n": "Kevin Akpoguma",
-    "r": "D"
-   },
-   {
-    "n": "Florian Grillitsch",
-    "r": "C"
-   },
-   {
-    "n": "Ilario Monterisi",
-    "r": "D"
-   },
-   {
-    "n": "Anouar El Azzouzi",
-    "r": "C"
-   },
-   {
-    "n": "Seydou Fini",
-    "r": "A"
-   },
-   {
-    "n": "Luis Hasa",
-    "r": "A"
-   },
-   {
-    "n": "Aleksa Terzić",
-    "r": "D"
-   },
-   {
-    "n": "Patrizio Masini",
-    "r": "C"
+    "n": "Akpoguma",
+    "r": "D",
+    "p": 1
    },
    {
     "n": "Omar Fayed",
-    "r": "D"
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Gabriele Bracaglia",
-    "r": "D"
+    "n": "Calò",
+    "r": "C",
+    "p": 4
    },
    {
-    "n": "Tomáš Bobček",
-    "r": "A"
+    "n": "Schmid",
+    "r": "C",
+    "p": 4
    },
    {
-    "n": "Enzo Tchato",
-    "r": "D"
+    "n": "Masini",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Sebastiano Desplanches",
-    "r": "P"
+    "n": "Cichella",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Francesco Gelli",
-    "r": "C"
+    "n": "Fini ",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Eldin Lolić",
-    "r": "P"
+    "n": "Zerbin",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Hasa",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "El Azzouzi A.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Kone B.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Gelli F.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Grillitsch",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Raimondo",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Kvernadze",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Ghedjemis",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Birligea",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Bobcek",
+    "r": "A",
+    "p": 2
    }
   ],
-  "Venezia": [
+  "Genoa": [
    {
-    "n": "Filip Stanković",
-    "r": "P"
+    "n": "Bijlow",
+    "r": "P",
+    "p": 3
    },
    {
-    "n": "Matías Moreno",
-    "r": "D"
+    "n": "Sommariva",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Joël Schingtienne",
-    "r": "D"
+    "n": "Stolz",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Bartol Franjić",
-    "r": "D"
+    "n": "Ostigard",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Ridgeciano Haps",
-    "r": "D"
+    "n": "Ehizibue",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Gianluca Busio",
-    "r": "C"
+    "n": "Vasquez",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Albion Rrahmani",
-    "r": "A"
+    "n": "Marcandalli",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Lamine Fanne",
-    "r": "C"
+    "n": "Mitaj",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Andrea Adorante",
-    "r": "A"
+    "n": "Otoa",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "John Yeboah",
-    "r": "A"
+    "n": "Sabelli",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Thierry Correia",
-    "r": "D"
+    "n": "Puczka",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Juan Jesus",
-    "r": "D"
+    "n": "Drameh",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Rufai Mohammed",
-    "r": "D"
+    "n": "Messias",
+    "r": "C",
+    "p": 4
    },
    {
-    "n": "Armel Bella-Kotchap",
-    "r": "D"
+    "n": "Baldanzi",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Antoine Hainaut",
-    "r": "D"
+    "n": "El Shaarawy",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Simon Sohm",
-    "r": "C"
+    "n": "Ellertsson",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Richie Sagrado",
-    "r": "D"
+    "n": "Frendrup",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Þórir Jóhann Helgason",
-    "r": "C"
+    "n": "Amorim",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Matteo Grandi",
-    "r": "P"
+    "n": "Sow",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Redouane Halhal",
-    "r": "D"
+    "n": "Traorè Hj.",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Toma Bašić",
-    "r": "C"
+    "n": "Meichtry",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Alessio Pozzi",
-    "r": "P"
+    "n": "Wiafe",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Lion Lauberbach",
-    "r": "A"
+    "n": "Venturino",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Matteo Dagasso",
-    "r": "C"
+    "n": "Osmajic",
+    "r": "A",
+    "p": 4
    },
    {
-    "n": "Alfred Duncan",
-    "r": "C"
+    "n": "Colombo",
+    "r": "A",
+    "p": 2
    },
    {
-    "n": "Marin Šverko",
-    "r": "D"
+    "n": "Vitinha O.",
+    "r": "A",
+    "p": 2
    },
    {
-    "n": "Lorenzo Berardi",
-    "r": "C"
+    "n": "Havel",
+    "r": "A",
+    "p": 1
    },
    {
-    "n": "Akor Adams",
-    "r": "A"
+    "n": "Robinho Junior",
+    "r": "A",
+    "p": 1
+   }
+  ],
+  "Inter": [
+   {
+    "n": "Martinez Jo.",
+    "r": "P",
+    "p": 3
    },
    {
-    "n": "Simone Panada",
-    "r": "C"
+    "n": "Provedel",
+    "r": "P",
+    "p": 2
    },
    {
-    "n": "Kornel Lisman",
-    "r": "C"
+    "n": "Di Gennaro",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Pasquale Mazzocchi",
-    "r": "D"
+    "n": "Dimarco",
+    "r": "D",
+    "p": 5
    },
    {
-    "n": "Kike Pérez",
-    "r": "C"
+    "n": "Carlos Augusto",
+    "r": "D",
+    "p": 4
    },
    {
-    "n": "Toni Fernández",
-    "r": "C"
+    "n": "Bisseck",
+    "r": "D",
+    "p": 4
    },
    {
-    "n": "Ale Gomes",
-    "r": "D"
+    "n": "Akanji",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Lorenzo Montipò",
-    "r": "P"
+    "n": "Bastoni",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Stones",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Spence",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Pavard",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Calhanoglu",
+    "r": "C",
+    "p": 5
+   },
+   {
+    "n": "Barella",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Zielinski",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Diouf",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Sucic P.",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Jones C.",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Mkhitaryan",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Luis Henrique",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Stankovic A.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Thuram",
+    "r": "A",
+    "p": 5
+   },
+   {
+    "n": "Martinez L.",
+    "r": "A",
+    "p": 5
+   },
+   {
+    "n": "Esposito F.P.",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Bonny",
+    "r": "A",
+    "p": 3
+   }
+  ],
+  "Juventus": [
+   {
+    "n": "Vicario",
+    "r": "P",
+    "p": 4
+   },
+   {
+    "n": "Pinsoglio",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Grabara",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Neto",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Bremer",
+    "r": "D",
+    "p": 4
+   },
+   {
+    "n": "Kalulu",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Gatti",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Lucumì",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Celik",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Cambiaso",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Cabal",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Kelly L.",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Rugani",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Conceicao",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Zhegrova",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Alajbegovic",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "McKennie",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Gonzalez N.",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Koopmeiners",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Douglas Luiz",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Locatelli",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Thuram K.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Sarr P.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Woltemade",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Kolo Muani",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Yildiz",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Boga",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Ekhator",
+    "r": "A",
+    "p": 1
+   },
+   {
+    "n": "Milik",
+    "r": "A",
+    "p": 1
+   }
+  ],
+  "Lazio": [
+   {
+    "n": "Mandas",
+    "r": "P",
+    "p": 4
+   },
+   {
+    "n": "Motta",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Renzetti",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Tavares N.",
+    "r": "D",
+    "p": 4
+   },
+   {
+    "n": "Pedraza",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Provstgaard",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Floriani Mussolini",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Doekhi",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Sutalo J.",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Leite",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Lazzari",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Marusic",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Pellegrini Lu.",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Zaccagni",
+    "r": "C",
+    "p": 5
+   },
+   {
+    "n": "Isaksen",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Taylor K.",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Frattesi",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Belahyane",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Dele-Bashiru",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Cancellieri",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Gudmundsson A.",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Rovella",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Cataldi",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Przyborek",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Noslin",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Pinamonti",
+    "r": "A",
+    "p": 4
+   }
+  ],
+  "Lecce": [
+   {
+    "n": "Falcone",
+    "r": "P",
+    "p": 2
+   },
+   {
+    "n": "Penev",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Bleve",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Tiago Gabriel",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Veiga D.",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Gallo",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Siebert",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Gaspar K.",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Ndaba",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Dembelè A.",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Jean",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Coulibaly L.",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Maleh",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Monteiro J.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Gorter",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Ngom",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Pierotti",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Ilic",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Gandelman",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Kaba",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Fofana Sa.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Berisha M.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Laerke",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "N'Dri",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Fatah",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Geubbels",
+    "r": "A",
+    "p": 2
+   },
+   {
+    "n": "Stulic",
+    "r": "A",
+    "p": 2
+   },
+   {
+    "n": "Esteban",
+    "r": "A",
+    "p": 1
+   }
+  ],
+  "Milan": [
+   {
+    "n": "Maignan",
+    "r": "P",
+    "p": 3
+   },
+   {
+    "n": "Terracciano",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Torriani",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Gila",
+    "r": "D",
+    "p": 4
+   },
+   {
+    "n": "Pavlovic",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Tomori",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "De Winter",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Bartesaghi",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Gabbia",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Diawara S.",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Estupinan",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Terracciano F.",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Rabiot",
+    "r": "C",
+    "p": 5
+   },
+   {
+    "n": "Pulisic",
+    "r": "C",
+    "p": 5
+   },
+   {
+    "n": "Moreira",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Modric",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Saelemaekers",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Chukwueze",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Cissè A.",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Hutchinson",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Musah",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Jashari",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Loftus-Cheek",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Comotto",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Ramos G.",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Camarda",
+    "r": "A",
+    "p": 1
    }
   ],
   "Monza": [
    {
-    "n": "Noel Törnqvist",
-    "r": "P"
+    "n": "Tornqvist",
+    "r": "P",
+    "p": 2
    },
    {
-    "n": "Saba Goglichidze",
-    "r": "D"
+    "n": "Thiam",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Lorenzo Lucchesi",
-    "r": "D"
+    "n": "Strajnar",
+    "r": "P",
+    "p": 1
    },
    {
-    "n": "Jan Ziółkowski",
-    "r": "D"
+    "n": "Mangas",
+    "r": "D",
+    "p": 4
    },
    {
-    "n": "Yvan Maye",
-    "r": "D"
+    "n": "Kouadio",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Valentin Antov",
-    "r": "D"
+    "n": "Goglichidze",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Ricardo Mangas",
-    "r": "D"
+    "n": "Birindelli",
+    "r": "D",
+    "p": 3
    },
    {
-    "n": "Manga Foe Ondoa",
-    "r": "C"
+    "n": "Carboni A.",
+    "r": "D",
+    "p": 2
    },
    {
-    "n": "Gustavo Varela",
-    "r": "A"
+    "n": "Lucchesi",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Patrick Cutrone",
-    "r": "A"
+    "n": "Bakoune",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Omari Forson",
-    "r": "C"
+    "n": "Antov",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Ebenezer Akinsanmiro",
-    "r": "C"
+    "n": "Ziolkowski",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Cyril Ngonge",
-    "r": "A"
+    "n": "Maye",
+    "r": "D",
+    "p": 1
    },
    {
-    "n": "Keita Baldé",
-    "r": "A"
+    "n": "Akinsanmiro",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Samuele Birindelli",
-    "r": "D"
+    "n": "Colpani",
+    "r": "C",
+    "p": 3
    },
    {
-    "n": "Demba Thiam",
-    "r": "P"
+    "n": "Foe Ondoa",
+    "r": "C",
+    "p": 2
    },
    {
-    "n": "Leonardo Colombo",
-    "r": "C"
+    "n": "Pessina",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Exequiel Zeballos",
-    "r": "A"
+    "n": "Folorunsho",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Adam Bakoune",
-    "r": "D"
+    "n": "Colombo L.",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Patrick Ciurria",
-    "r": "A"
+    "n": "Tourè I.",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Idrissa Touré",
-    "r": "C"
+    "n": "Mout",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Andrea Colpani",
-    "r": "A"
+    "n": "Ciurria",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Matteo Pessina",
-    "r": "C"
+    "n": "Forson O.",
+    "r": "C",
+    "p": 1
    },
    {
-    "n": "Aljaž Strajnar",
-    "r": "P"
+    "n": "Varela G.",
+    "r": "A",
+    "p": 4
    },
    {
-    "n": "Andrea Carboni",
-    "r": "D"
+    "n": "Robinson J.",
+    "r": "A",
+    "p": 3
    },
    {
-    "n": "Jay Robinson",
-    "r": "C"
+    "n": "Mota",
+    "r": "A",
+    "p": 3
    },
    {
-    "n": "Dany Mota",
-    "r": "A"
+    "n": "Zeballos",
+    "r": "A",
+    "p": 3
    },
    {
-    "n": "Eddy Kouadio",
-    "r": "D"
+    "n": "Cutrone",
+    "r": "A",
+    "p": 2
    },
    {
-    "n": "Kevin Martins",
-    "r": "A"
+    "n": "Ngonge",
+    "r": "A",
+    "p": 1
+   }
+  ],
+  "Napoli": [
+   {
+    "n": "Meret",
+    "r": "P",
+    "p": 3
    },
    {
-    "n": "Mathis Mout",
-    "r": "C"
+    "n": "Milinkovic-Savic V.",
+    "r": "P",
+    "p": 3
    },
    {
-    "n": "Michael Folorunsho",
-    "r": "C"
+    "n": "Contini",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Rrahmani",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Di Lorenzo",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Spinazzola",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Marin R.",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Olivera",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Favasuli",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Badiashile",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Beukema",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Buongiorno",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Marianucci",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "De Bruyne",
+    "r": "C",
+    "p": 5
+   },
+   {
+    "n": "McTominay",
+    "r": "C",
+    "p": 5
+   },
+   {
+    "n": "Politano",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Lobotka",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Gilmour",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Vergara",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Zambo Anguissa",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Hojlund",
+    "r": "A",
+    "p": 5
+   },
+   {
+    "n": "Lang",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Santos A.",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Giovane",
+    "r": "A",
+    "p": 2
+   },
+   {
+    "n": "Neres",
+    "r": "A",
+    "p": 2
+   },
+   {
+    "n": "Lucca",
+    "r": "A",
+    "p": 2
+   }
+  ],
+  "Parma": [
+   {
+    "n": "Daffara",
+    "r": "P",
+    "p": 3
+   },
+   {
+    "n": "Corvi",
+    "r": "P",
+    "p": 2
+   },
+   {
+    "n": "Ghidotti",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Valeri",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Troilo",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Delprato",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Diego Carlos",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Britschgi",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Ndiaye",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Drobnic",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Valenti",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Carboni F.",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Fabbian",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Almqvist",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Keita M.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Bernabè",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Ordonez C.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Diallo O.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Sierro",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Cremaschi",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Nicolussi Caviglia",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Romero D.",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Lontani",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Tourè E.",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Elphege",
+    "r": "A",
+    "p": 2
+   },
+   {
+    "n": "Frigan",
+    "r": "A",
+    "p": 2
+   },
+   {
+    "n": "De Martis",
+    "r": "A",
+    "p": 1
+   }
+  ],
+  "Roma": [
+   {
+    "n": "Svilar",
+    "r": "P",
+    "p": 4
+   },
+   {
+    "n": "Gollini",
+    "r": "P",
+    "p": 3
+   },
+   {
+    "n": "De Marzi",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Vasquez D.",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Wesley",
+    "r": "D",
+    "p": 4
+   },
+   {
+    "n": "Molina N.",
+    "r": "D",
+    "p": 4
+   },
+   {
+    "n": "Hermoso",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Mancini",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Balerdi",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "N'Dicka",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Ghilardi",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Lulli",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Koulierakis",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Rensch",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Mora",
+    "r": "C",
+    "p": 5
+   },
+   {
+    "n": "Pisilli",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Cristante",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Konè M.",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "De Roon",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Pellegrini Lo.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Malen",
+    "r": "A",
+    "p": 5
+   },
+   {
+    "n": "Soulè",
+    "r": "A",
+    "p": 5
+   },
+   {
+    "n": "Dybala",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Castro S.",
+    "r": "A",
+    "p": 4
+   }
+  ],
+  "Sassuolo": [
+   {
+    "n": "Muric",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Turati",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Russo A.",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Satalino",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Doig",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Leysen F.",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Odenthal",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Cinquegrano",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Idzes",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Obrador",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Caleta-Car",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Candè",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Van Der Brempt",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Walukiewicz",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Pieragnolo",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Matic",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Adzic",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Bakola",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Volpato",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Thorstvedt",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Dominguez B.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Konè I.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Lipani",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Sulemana I.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Boloca",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Esposito Se.",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Berardi",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Laurientè",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Bowie",
+    "r": "A",
+    "p": 3
+   }
+  ],
+  "Torino": [
+   {
+    "n": "Perri",
+    "r": "P",
+    "p": 3
+   },
+   {
+    "n": "Mascardi",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Siviero",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Belghali",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Coco",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Comuzzo",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Ismajli",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Comert",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Fortini",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Rodriguez R.",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Patterson",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Biraghi",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Mandragora",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Vlasic",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Cacciamani",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Fitz-Jim",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Braganca",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Gineitis",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Casadei",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Oristanio",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Ilkhan",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Aboukhlal",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Simeone",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Adams C.",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Kulenovic",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Zapata D.",
+    "r": "A",
+    "p": 1
+   }
+  ],
+  "Udinese": [
+   {
+    "n": "Okoye",
+    "r": "P",
+    "p": 2
+   },
+   {
+    "n": "Padelli",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Mrozek",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Kamara H.",
+    "r": "D",
+    "p": 4
+   },
+   {
+    "n": "Abankwah",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Alaba",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Solet",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Palma",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Vojvoda",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Ebosse",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Kabasele",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Bertola",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Zanoli",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Arizala",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Ekkelenkamp",
+    "r": "C",
+    "p": 4
+   },
+   {
+    "n": "Zaniolo",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Karlstrom",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Piotrowski",
+    "r": "C",
+    "p": 3
+   },
+   {
+    "n": "Unai Gomez",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Miller L.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Chakvetadze",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Zarraga",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Jovanovic",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Lovric",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Davis K.",
+    "r": "A",
+    "p": 4
+   },
+   {
+    "n": "Gueye",
+    "r": "A",
+    "p": 2
+   },
+   {
+    "n": "Bayo V.",
+    "r": "A",
+    "p": 1
+   }
+  ],
+  "Venezia": [
+   {
+    "n": "Stankovic F.",
+    "r": "P",
+    "p": 3
+   },
+   {
+    "n": "Grandi",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Pozzi",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Montipò",
+    "r": "P",
+    "p": 1
+   },
+   {
+    "n": "Hainaut",
+    "r": "D",
+    "p": 3
+   },
+   {
+    "n": "Sagrado",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Correia T.",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Juan Jesus",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Mazzocchi",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Haps",
+    "r": "D",
+    "p": 2
+   },
+   {
+    "n": "Halhal",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Moreno M.",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Bella-Kotchap",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Schingtienne",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Sverko",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Gomes",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Franjic",
+    "r": "D",
+    "p": 1
+   },
+   {
+    "n": "Busio",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Perez K.",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Basic",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Sohm",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Helgason",
+    "r": "C",
+    "p": 2
+   },
+   {
+    "n": "Dagasso",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Fernandez T.",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Duncan",
+    "r": "C",
+    "p": 1
+   },
+   {
+    "n": "Adams A.",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Yeboah J.",
+    "r": "A",
+    "p": 3
+   },
+   {
+    "n": "Rrahmani Al.",
+    "r": "A",
+    "p": 2
+   },
+   {
+    "n": "Lauberbach",
+    "r": "A",
+    "p": 1
+   },
+   {
+    "n": "Lisman",
+    "r": "A",
+    "p": 1
+   },
+   {
+    "n": "Adorante",
+    "r": "A",
+    "p": 1
    }
   ]
  }
