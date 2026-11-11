@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-10T22:07:26.892004+00:00",
+ "aggiornato": "2026-11-11T23:16:37.499258+00:00",
  "partite": [
   {
    "id": 558525,
@@ -29,8 +29,8 @@
    "giornata": 12,
    "casa": "Lazio",
    "trasferta": "Lecce",
-   "lh": 2.398,
-   "la": 0.71,
+   "lh": 2.397,
+   "la": 0.711,
    "rho": 0.05,
    "statCasa": {
     "gf": 2.27,
@@ -50,8 +50,8 @@
    "giornata": 12,
    "casa": "Parma",
    "trasferta": "Roma",
-   "lh": 0.973,
-   "la": 2.039,
+   "lh": 0.974,
+   "la": 2.038,
    "rho": 0.05,
    "statCasa": {
     "gf": 0.82,
@@ -113,8 +113,8 @@
    "giornata": 12,
    "casa": "Bologna",
    "trasferta": "Udinese",
-   "lh": 2.134,
-   "la": 0.917,
+   "lh": 2.133,
+   "la": 0.918,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.45,
@@ -134,7 +134,7 @@
    "giornata": 12,
    "casa": "Sassuolo",
    "trasferta": "Genoa",
-   "lh": 1.514,
+   "lh": 1.515,
    "la": 1.52,
    "rho": 0.05,
    "statCasa": {
@@ -176,8 +176,8 @@
    "giornata": 12,
    "casa": "Atalanta",
    "trasferta": "Inter",
-   "lh": 1.194,
-   "la": 1.921,
+   "lh": 1.195,
+   "la": 1.92,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.55,
@@ -197,8 +197,8 @@
    "giornata": 12,
    "casa": "Monza",
    "trasferta": "Fiorentina",
-   "lh": 1.668,
-   "la": 1.492,
+   "lh": 1.669,
+   "la": 1.491,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.55,
@@ -218,8 +218,8 @@
    "giornata": 13,
    "casa": "Venezia",
    "trasferta": "Bologna",
-   "lh": 1.246,
-   "la": 1.715,
+   "lh": 1.247,
+   "la": 1.714,
    "rho": 0.05,
    "statCasa": {
     "gf": 0.73,
@@ -239,7 +239,7 @@
    "giornata": 13,
    "casa": "Frosinone",
    "trasferta": "Parma",
-   "lh": 2.043,
+   "lh": 2.042,
    "la": 0.988,
    "rho": 0.05,
    "statCasa": {
@@ -260,8 +260,8 @@
    "giornata": 13,
    "casa": "Torino",
    "trasferta": "Lazio",
-   "lh": 1.21,
-   "la": 1.819,
+   "lh": 1.211,
+   "la": 1.818,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.36,
@@ -282,7 +282,7 @@
    "casa": "Inter",
    "trasferta": "Genoa",
    "lh": 2.17,
-   "la": 0.892,
+   "la": 0.893,
    "rho": 0.05,
    "statCasa": {
     "gf": 2.55,
@@ -302,8 +302,8 @@
    "giornata": 13,
    "casa": "Udinese",
    "trasferta": "Fiorentina",
-   "lh": 1.447,
-   "la": 1.644,
+   "lh": 1.448,
+   "la": 1.643,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.09,
@@ -323,8 +323,8 @@
    "giornata": 13,
    "casa": "Sassuolo",
    "trasferta": "Napoli",
-   "lh": 1.159,
-   "la": 1.938,
+   "lh": 1.16,
+   "la": 1.936,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.45,
@@ -344,8 +344,8 @@
    "giornata": 13,
    "casa": "Roma",
    "trasferta": "Monza",
-   "lh": 2.787,
-   "la": 0.448,
+   "lh": 2.785,
+   "la": 0.449,
    "rho": 0.05,
    "statCasa": {
     "gf": 2.82,
@@ -386,7 +386,7 @@
    "giornata": 13,
    "casa": "Lecce",
    "trasferta": "Atalanta",
-   "lh": 1.547,
+   "lh": 1.548,
    "la": 1.501,
    "rho": 0.05,
    "statCasa": {
@@ -407,8 +407,8 @@
    "giornata": 13,
    "casa": "Cagliari",
    "trasferta": "Milan",
-   "lh": 1.355,
-   "la": 1.631,
+   "lh": 1.356,
+   "la": 1.63,
    "rho": 0.05,
    "statCasa": {
     "gf": 0.91,
@@ -429,7 +429,7 @@
    "casa": "Bologna",
    "trasferta": "Roma",
    "lh": 1.252,
-   "la": 1.794,
+   "la": 1.793,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.45,
@@ -449,8 +449,8 @@
    "giornata": 14,
    "casa": "Monza",
    "trasferta": "Como",
-   "lh": 1.179,
-   "la": 1.861,
+   "lh": 1.18,
+   "la": 1.86,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.55,
@@ -471,7 +471,7 @@
    "casa": "Frosinone",
    "trasferta": "Inter",
    "lh": 1.546,
-   "la": 1.605,
+   "la": 1.603,
    "rho": 0.05,
    "statCasa": {
     "gf": 2.18,
@@ -491,8 +491,8 @@
    "giornata": 14,
    "casa": "Napoli",
    "trasferta": "Lecce",
-   "lh": 2.146,
-   "la": 0.91,
+   "lh": 2.145,
+   "la": 0.911,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.64,
@@ -533,7 +533,7 @@
    "giornata": 14,
    "casa": "Lazio",
    "trasferta": "Atalanta",
-   "lh": 2.249,
+   "lh": 2.248,
    "la": 0.847,
    "rho": 0.05,
    "statCasa": {
@@ -575,7 +575,7 @@
    "giornata": 14,
    "casa": "Milan",
    "trasferta": "Parma",
-   "lh": 2.034,
+   "lh": 2.033,
    "la": 0.973,
    "rho": 0.05,
    "statCasa": {
@@ -597,7 +597,7 @@
    "casa": "Venezia",
    "trasferta": "Sassuolo",
    "lh": 1.621,
-   "la": 1.417,
+   "la": 1.416,
    "rho": 0.05,
    "statCasa": {
     "gf": 0.73,
@@ -638,8 +638,8 @@
    "giornata": 15,
    "casa": "Udinese",
    "trasferta": "Frosinone",
-   "lh": 1.122,
-   "la": 1.981,
+   "lh": 1.123,
+   "la": 1.98,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.09,
@@ -659,7 +659,7 @@
    "giornata": 15,
    "casa": "Cagliari",
    "trasferta": "Venezia",
-   "lh": 1.757,
+   "lh": 1.758,
    "la": 1.171,
    "rho": 0.05,
    "statCasa": {
@@ -680,7 +680,7 @@
    "giornata": 15,
    "casa": "Lecce",
    "trasferta": "Sassuolo",
-   "lh": 1.791,
+   "lh": 1.792,
    "la": 1.324,
    "rho": 0.05,
    "statCasa": {
@@ -722,8 +722,8 @@
    "giornata": 15,
    "casa": "Lazio",
    "trasferta": "Roma",
-   "lh": 1.547,
-   "la": 1.515,
+   "lh": 1.548,
+   "la": 1.514,
    "rho": 0.05,
    "statCasa": {
     "gf": 2.27,
@@ -743,8 +743,8 @@
    "giornata": 15,
    "casa": "Inter",
    "trasferta": "Torino",
-   "lh": 2.236,
-   "la": 0.879,
+   "lh": 2.235,
+   "la": 0.88,
    "rho": 0.05,
    "statCasa": {
     "gf": 2.55,
@@ -764,8 +764,8 @@
    "giornata": 15,
    "casa": "Parma",
    "trasferta": "Fiorentina",
-   "lh": 1.546,
-   "la": 1.457,
+   "lh": 1.547,
+   "la": 1.456,
    "rho": 0.05,
    "statCasa": {
     "gf": 0.82,
@@ -806,7 +806,7 @@
    "giornata": 15,
    "casa": "Atalanta",
    "trasferta": "Genoa",
-   "lh": 1.642,
+   "lh": 1.643,
    "la": 1.342,
    "rho": 0.05,
    "statCasa": {
@@ -849,7 +849,7 @@
    "casa": "Frosinone",
    "trasferta": "Lazio",
    "lh": 1.486,
-   "la": 1.603,
+   "la": 1.602,
    "rho": 0.05,
    "statCasa": {
     "gf": 2.18,
@@ -869,8 +869,8 @@
    "giornata": 16,
    "casa": "Lecce",
    "trasferta": "Inter",
-   "lh": 1.041,
-   "la": 2.077,
+   "lh": 1.042,
+   "la": 2.075,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.09,
@@ -954,7 +954,7 @@
    "casa": "Fiorentina",
    "trasferta": "Bologna",
    "lh": 1.469,
-   "la": 1.598,
+   "la": 1.597,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.55,
@@ -995,8 +995,8 @@
    "giornata": 16,
    "casa": "Venezia",
    "trasferta": "Monza",
-   "lh": 1.534,
-   "la": 1.49,
+   "lh": 1.535,
+   "la": 1.489,
    "rho": 0.05,
    "statCasa": {
     "gf": 0.73,
@@ -1037,8 +1037,8 @@
    "giornata": 16,
    "casa": "Atalanta",
    "trasferta": "Napoli",
-   "lh": 1.346,
-   "la": 1.68,
+   "lh": 1.347,
+   "la": 1.679,
    "rho": 0.05,
    "statCasa": {
     "gf": 1.55,
