@@ -1,25 +1,4 @@
 {
- "ultimoGiro": "2026-11-24T03:28:18.903856+00:00",
- "roseLette": {
-  "Inter": 24,
-  "Milan": 27,
-  "Juventus": 29,
-  "Napoli": 27,
-  "Roma": 25,
-  "Lazio": 31,
-  "Atalanta": 25,
-  "Bologna": 28,
-  "Fiorentina": 23,
-  "Torino": 29,
-  "Genoa": 28,
-  "Cagliari": 31,
-  "Lecce": 32,
-  "Udinese": 28,
-  "Parma": "errore: 429 Client Error: Too Many Requests for url: https://en.wikipedia.org/w/api.php?action=parse&page=Parma+Calcio+1913&prop=wikitext&format=json&formatversion=2&redirects=1",
-  "Como": "errore: 429 Client Error: Too Many Requests for url: https://en.wikipedia.org/w/api.php?action=parse&page=Como+1907&prop=wikitext&format=json&formatversion=2&redirects=1",
-  "Sassuolo": "errore: 429 Client Error: Too Many Requests for url: https://en.wikipedia.org/w/api.php?action=parse&page=US+Sassuolo+Calcio&prop=wikitext&format=json&formatversion=2&redirects=1",
-  "Frosinone": "errore: 429 Client Error: Too Many Requests for url: https://en.wikipedia.org/w/api.php?action=parse&page=Frosinone+Calcio&prop=wikitext&format=json&formatversion=2&redirects=1",
-  "Venezia": "errore: 429 Client Error: Too Many Requests for url: https://en.wikipedia.org/w/api.php?action=parse&page=Venezia+FC&prop=wikitext&format=json&formatversion=2&redirects=1",
-  "Monza": "errore: 429 Client Error: Too Many Requests for url: https://en.wikipedia.org/w/api.php?action=parse&page=AC+Monza&prop=wikitext&format=json&formatversion=2&redirects=1"
- }
+ "ultimoGiro": "2026-11-25T01:34:08.287184+00:00",
+ "roseLette": {}
 }
